@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecosistema Fabric & Azure AI Foundry - Alestra</title>
+    <!-- Reveal.js Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <!-- Theme - Premium Dark -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/moon.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Devicon -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --ms-blue: #00a4ef;
+            --ms-purple: #605dec;
+            --ms-teal: #00f2ff;
+            --bg-dark: #0b1120;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        .reveal { background-color: var(--bg-dark); }
+        .reveal h1 { color: var(--ms-blue); text-transform: none; font-weight: 800; text-shadow: 0 0 20px rgba(0, 164, 239, 0.4); }
+        .reveal h2 { color: #ffffff; text-transform: none; font-weight: 700; }
+        .reveal section { color: #e2e8f0; }
+        
+        /* Glassmorphism Cards */
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            height: 100%;
+        }
+
+        /* Alestra Logo Custom */
+        .alestra-brand {
+            display: flex;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 400;
+            font-size: 60px;
+            color: white;
+            letter-spacing: -4px;
+        }
+        .alestra-star {
+            color: var(--ms-blue);
+            font-size: 70px;
+            margin-left: 5px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px var(--ms-blue));
+        }
+
+        /* --- Architecture Diagram Styles --- */
+        .arch-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.5fr 1fr;
+            gap: 25px;
+            position: relative;
+            padding: 20px;
+            height: 520px;
+            align-items: stretch;
+        }
+
+        .arch-pillar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 2;
+        }
+
+        .arch-node {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            transition: all 0.3s;
+        }
+
+        .arch-node i, .arch-node svg { font-size: 28px; margin-bottom: 8px; }
+        
+        /* Custom Colors for Fabric Icons */
+        .icon-factory { color: #59b4d9; }
+        .icon-onelake { color: #0078d4; }
+        .icon-powerbi { color: #f2c811; }
+
+        .pillar-label {
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid var(--ms-blue);
+            padding-bottom: 8px;
+        }
+
+        .node-main {
+            background: linear-gradient(135deg, rgba(0, 164, 239, 0.15), rgba(96, 93, 236, 0.15));
+            border: 2px solid var(--ms-blue);
+            box-shadow: 0 0 15px rgba(0, 164, 239, 0.2);
+        }
+
+        /* Animated Flow Lines */
+        .flow-path {
+            position: absolute;
+            top: 50%;
+            height: 4px;
+            background: rgba(255,255,255,0.03);
+            z-index: 1;
+        }
+
+        .flow-line-anim {
+            position: absolute;
+            height: 100%;
+            width: 150px;
+            background: linear-gradient(90deg, transparent, var(--ms-teal), transparent);
+            animation: flowRight 2.5s linear infinite;
+        }
+
+        @keyframes flowRight {
+            0% { left: -20%; opacity: 0; }
+            50% { opacity: 1; }
+            100% { left: 120%; opacity: 0; }
+        }
+
+        .accent-blue { color: var(--ms-blue); }
+        .accent-purple { color: var(--ms-purple); }
+        .accent-teal { color: var(--ms-teal); }
+
+        /* Slide 5 Specific Architecture Styles */
+        .foundry-bg {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+        }
+        .foundry-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: #8da4c9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .f-icon-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .f-icon-item {
+            width: 75px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 9px;
+            text-align: center;
+            opacity: 0.9;
+        }
+        .f-icon-item i { font-size: 24px; margin-bottom: 5px; }
+        
+        /* Arrow Path definition for architecture */
+        .arrow-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .arrow-line::before {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.2);
+            z-index: 1;
+        }
+        .arrow-line::after {
+            content: '▶';
+            position: absolute;
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+            z-index: 2;
+        }
+        .arrow-h::before { height: 3px; width: 100%; top: 50%; left: 0; }
+        .arrow-h::after { right: -5px; top: 50%; transform: translateY(-50%); }
+        .arrow-v::before { width: 3px; height: 100%; left: 50%; top: 0; }
+        .arrow-v::after { bottom: -10px; left: 50%; transform: translateX(-50%) rotate(90deg); }
+        .arrow-label {
+            position: absolute;
+            font-size: 10px;
+            color: #ccc;
+            background: var(--bg-dark);
+            padding: 2px 5px;
+            z-index: 3;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .footer-fixed {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="footer-fixed">
+        <div class="flex items-center gap-1">
+            <span class="text-white font-bold text-sm">alestra</span>
+            <span class="text-blue-400 font-bold text-lg">*</span>
+        </div>
+        <div style="width: 1px; background: white; height: 15px; opacity: 0.3;"></div>
+        <div class="flex items-center gap-2">
+            <svg width="18" viewBox="0 0 23 23"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M12 1h10v10H12z"/><path fill="#00a4ef" d="M1 12h10v10H1z"/><path fill="#ffb900" d="M12 12h10v10H12z"/></svg>
+            <span class="text-[10px] text-white uppercase font-bold tracking-widest">Microsoft Azure</span>
+        </div>
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Portada -->
+            <section data-background-gradient="linear-gradient(135deg, #0b1120 0%, #1e293b 100%)">
+                <div class="logo-bar">
+                    <div class="alestra-brand">alestra<span class="alestra-star">✶</span></div>
+                    <div style="height: 60px; width: 2px; background: rgba(255,255,255,0.15);"></div>
+                    <div class="flex items-center gap-6">
+                        <div class="flex items-center gap-3">
+                            <svg width="40" viewBox="0 0 23 23"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M12 1h10v10H12z"/><path fill="#00a4ef" d="M1 12h10v10H1z"/><path fill="#ffb900" d="M12 12h10v10H12z"/></svg>
+                            <span class="text-2xl font-bold text-white">Microsoft</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg width="35" viewBox="0 0 32 32"><path fill="#0089d6" d="m16.5 2.5-14 24.5 6.5 4z"/><path fill="#0072c6" d="m16.5 2.5 11 19-14.5 7.5-6.5-4z"/><path fill="#114a8b" d="m13 29 11-4 6.5 6.5z"/><path fill="#00a4ef" d="m16.5 2.5 14 24.5-6.5 4-11-4z"/></svg>
+                            <span class="text-2xl font-light text-slate-300">Azure</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="text-2xl opacity-60 uppercase tracking-widest mb-4">Ecosistema Unificado</h3>
+                <h1>Fabric & Azure AI Foundry</h1>
+                <p class="text-xl text-slate-400 italic">"Del dato a la decisión acelerando el valor del negocio con data e IA"</p>
+            </section>
+
+            <!-- Slide 2: Valor del Dato -->
+            <section>
+                <h2 class="mb-10 text-4xl">Impacto del <span class="accent-teal">Valor del Dato</span></h2>
+                <div class="grid grid-cols-2 gap-10 items-center">
+                    <div class="card h-[450px] flex flex-col justify-center items-center">
+                        <h4 class="text-sm uppercase font-bold accent-blue mb-4 text-center">Eficacia en Decisiones Estratégicas</h4>
+                        <div style="height: 280px; width: 100%;">
+                            <canvas id="dataChart"></canvas>
+                        </div>
+                        <p class="text-[10px] mt-4 opacity-40">Fuente: Gartner Research 2024</p>
+                    </div>
+                    <div class="flex flex-col gap-4 text-left">
+                        <div class="card border-l-8 border-l-[#00f2ff] fragment fade-left">
+                            <div class="flex justify-between font-black text-4xl accent-teal mb-1">23% <span class="text-[10px] px-2 py-1 bg-[#00f2ff]/20 rounded-full font-bold text-[#00f2ff] border border-[#00f2ff]/30 h-fit">FUENTE: IDC</span></div>
+                            <p class="text-[12px] uppercase font-bold tracking-widest">Rentabilidad Directa</p>
+                            <p class="text-[11px] opacity-60 border-t border-white/10 mt-2 pt-2">Caso: Walmart optimizó inventario en tiempo real.</p>
+                        </div>
+                        <div class="card border-l-8 border-l-[#605dec] fragment fade-left">
+                            <div class="flex justify-between font-black text-4xl accent-purple mb-1">5.2x <span class="text-[10px] px-2 py-1 bg-[#605dec]/20 rounded-full font-bold text-[#b4b0ff] border border-[#605dec]/30 h-fit">FUENTE: FORRESTER</span></div>
+                            <p class="text-[12px] uppercase font-bold tracking-widest">Velocidad de Respuesta</p>
+                            <p class="text-[11px] opacity-60 border-t border-white/10 mt-2 pt-2">Caso: Maersk aceleró decisiones de días a horas.</p>
+                        </div>
+                        <div class="card border-l-8 border-l-[#00a4ef] fragment fade-left">
+                            <div class="flex justify-between font-black text-4xl accent-blue mb-1">84% <span class="text-[10px] px-2 py-1 bg-[#00a4ef]/20 rounded-full font-bold text-[#80d8ff] border border-[#00a4ef]/30 h-fit">FUENTE: GARTNER</span></div>
+                            <p class="text-[12px] uppercase font-bold tracking-widest">Precisión Operativa</p>
+                            <p class="text-[11px] opacity-60 border-t border-white/10 mt-2 pt-2">Caso: PepsiCo y BMW eliminaron errores manuales.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: Valor de la IA -->
+            <section>
+                <h2 class="mb-6">Valor Estratégico de la <span class="accent-teal">IA Foundry</span></h2>
+                <div class="grid grid-cols-2 gap-6 items-center">
+                    <div class="flex flex-col gap-3 text-left">
+                        <div class="card border-l-4 border-l-[#00f2ff] fragment fade-right">
+                            <div class="text-[12px] font-bold uppercase text-blue-400 mb-1">Bot Service / NLP</div>
+                            <div class="text-3xl font-black accent-teal">+40% Productividad</div>
+                            <p class="text-[11px] opacity-60">Implementación de GPT-4 para escala masiva (Caso Klarna).</p>
+                        </div>
+                        <div class="card border-l-4 border-l-[#605dec] fragment fade-right">
+                            <div class="text-[12px] font-bold uppercase text-purple-400 mb-1">Agents / Machine Learning</div>
+                            <div class="text-3xl font-black accent-purple">+30% Eficiencia Costos</div>
+                            <p class="text-[11px] opacity-60">Modelos predictivos para manufactura (Caso BMW).</p>
+                        </div>
+                        <div class="card border-l-4 border-l-[#00a4ef] fragment fade-right">
+                            <div class="text-[12px] font-bold uppercase text-sky-400 mb-1">OCR / Document Intelligence</div>
+                            <div class="text-3xl font-black accent-blue">84% Precisión Procesos</div>
+                            <p class="text-[11px] opacity-60">Automatización de supply chain y facturación global.</p>
+                        </div>
+                    </div>
+                    <div class="card h-[450px] flex flex-col justify-center">
+                        <h4 class="text-sm uppercase font-bold accent-purple mb-4 text-center">ROI por Servicio de IA Foundry</h4>
+                        <div style="height: 280px; width: 100%;">
+                            <canvas id="aiChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Arquitectura End-to-End -->
+            <section>
+                <h2 class="mb-6">Arquitectura Moderna de <span class="accent-purple">Analytics</span></h2>
+                <div class="arch-container">
+                    
+                    <!-- Pilar 0: Fuentes -->
+                    <div class="arch-pillar transform translate-y-[20px]">
+                        <div class="pillar-label text-[14px]">Fuentes</div>
+                        <div class="arch-node">
+                            <div class="flex gap-3 mb-1">
+                                <i class="devicon-amazonwebservices-plain-wordmark text-3xl" style="color: #ff9900;"></i>
+                                <i class="devicon-googlecloud-plain text-3xl" style="color: #4285F4;"></i>
+                            </div>
+                            <span class="text-[12px]">Cloud (AWS/GCP)</span>
+                        </div>
+                        <div class="arch-node">
+                            <div class="flex gap-3 mb-1">
+                                <i class="devicon-microsoftsqlserver-plain text-3xl" style="color: #cc292b;"></i>
+                                <i class="devicon-oracle-original text-3xl" style="color: #F80000;"></i>
+                            </div>
+                            <span class="text-[12px]">On-Premise DB</span>
+                        </div>
+                        <div class="arch-node">
+                            <i class="fa-solid fa-file-csv text-3xl mb-1 text-green-400"></i>
+                            <span class="text-[12px]">Sistemas ERP/CSV</span>
+                        </div>
+                    </div>
+
+                    <!-- Pilar 1: Ingest -->
+                    <div class="arch-pillar">
+                        <div class="pillar-label">Ingest</div>
+                        <div class="arch-node node-main h-full">
+                            <i class="fa-solid fa-arrows-spin icon-factory"></i>
+                            <div class="font-bold text-lg">Data Factory</div>
+                            <div class="text-[11px] opacity-70 mt-1">ETL & Pipelines</div>
+                        </div>
+                    </div>
+
+                    <!-- Pilar 2: Store (OneLake) -->
+                    <div class="arch-pillar">
+                        <div class="pillar-label">Store</div>
+                        <div class="arch-node node-main h-full flex flex-col gap-3">
+                            <i class="fa-solid fa-layer-group icon-onelake"></i>
+                            <div class="font-bold text-lg">OneLake</div>
+                            <div class="grid grid-cols-1 gap-2 w-full px-3">
+                                <div class="bg-blue-900/60 rounded-lg p-2 font-bold text-[12px]">Gold (Analytics)</div>
+                                <div class="bg-blue-800/60 rounded-lg p-2 font-bold text-[12px]">Silver (Refined)</div>
+                                <div class="bg-blue-700/60 rounded-lg p-2 font-bold text-[12px]">Bronze (Raw)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pilar 3: Serve -->
+                    <div class="arch-pillar">
+                        <div class="pillar-label">Serve</div>
+                        <div class="arch-node node-main h-full">
+                            <i class="fa-solid fa-chart-pie icon-powerbi"></i>
+                            <div class="font-bold text-lg">Power BI</div>
+                            <div class="text-[11px] opacity-70 mt-1">Dashboards & Insights</div>
+                        </div>
+                    </div>
+
+                    <!-- Flow lines background -->
+                    <div class="flow-path" style="left: 20%; width: 55%; top: 40%;"><div class="flow-line-anim"></div><i class="fa-solid fa-chevron-right absolute right-0 text-[#00f2ff] top-[-6px]"></i></div>
+                    <div class="flow-path" style="left: 20%; width: 55%; top: 65%;"><div class="flow-line-anim" style="animation-delay: 1.2s;"></div><i class="fa-solid fa-chevron-right absolute right-0 text-[#00f2ff] top-[-6px]"></i></div>
+                    
+                    <!-- Intra pillar arrows -->
+                    <div class="absolute left-[39%] top-[25%] opacity-50"><i class="fa-solid fa-arrow-right-long text-xl text-blue-400"></i></div>
+                    <div class="absolute left-[62%] top-[25%] opacity-50"><i class="fa-solid fa-arrow-right-long text-xl text-blue-400"></i></div>
+                    <div class="absolute left-[84%] top-[25%] opacity-50"><i class="fa-solid fa-arrow-right-long text-xl text-blue-400"></i></div>
+                    
+                </div>
+                <p class="text-[14px] mt-6 opacity-70 font-medium">Flujo automatizado de datos: De la ingesta cruda a la visualización estratégica.</p>
+            </section>
+
+            <!-- Slide 5: Azure AI Foundry Architecture -->
+            <section data-background-color="#0b1120">
+                <h2 class="mb-2 text-3xl text-left">Arquitectura End-to-End: <span class="accent-teal">Microsoft Foundry</span></h2>
+                
+                <div class="relative w-full h-[600px] mt-8 text-left" style="font-family: 'Segoe UI', sans-serif;">
+                    
+                    <!-- Top Left: Foundry Development -->
+                    <div class="foundry-bg absolute top-0 left-0 w-[55%] h-[260px]">
+                        <div class="foundry-title">Microsoft Foundry – Development</div>
+                        <div class="f-icon-grid">
+                            <div class="f-icon-item"><i class="fa-solid fa-magnifying-glass text-blue-400"></i> Foundry IQ</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-brain text-purple-400"></i> Foundry</div>
+                            <div class="f-icon-item"><i class="devicon-azure-plain text-blue-500"></i> Cosmos DB</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-hard-drive text-teal-400"></i> Storage</div>
+                            <div class="f-icon-item"><i class="fa-regular fa-lightbulb text-purple-600"></i> App Insights</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-chart-line text-green-400"></i> Log Analytics</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-bolt text-blue-300"></i> Event Grid</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-triangle-exclamation text-yellow-500"></i> Anomaly Alert</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-cloud text-blue-300"></i> AI Gateway</div>
+                            <!-- Solicitados: OCR, TEXT, VOICE -->
+                            <div class="f-icon-item"><i class="fa-solid fa-file-signature text-orange-400"></i> OCR</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-language text-blue-400"></i> TEXT</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-microphone text-pink-400"></i> VOICE</div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow: Customization (down) -->
+                    <div class="arrow-line arrow-v absolute top-[260px] left-[25%] h-[40px]">
+                        <span class="arrow-label top-[10px] left-[10px]">Customization</span>
+                    </div>
+
+                    <!-- Arrow: To UX (Right) -->
+                    <div class="arrow-line arrow-h absolute top-[80px] left-[55%] w-[18%]">
+                        <div class="absolute top-[-35px] left-[50%] transform -translate-x-1/2 flex flex-col items-center">
+                            <i class="fa-solid fa-robot text-blue-400 text-2xl"></i>
+                            <span class="text-[10px] font-bold mt-1 text-slate-300">Agent 365</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Left: Data Platform -->
+                    <div class="foundry-bg absolute top-[300px] left-[10%] w-[30%] h-[160px]">
+                        <div class="foundry-title text-center text-blue-300">Data Platform</div>
+                        <div class="f-icon-grid">
+                            <div class="f-icon-item"><i class="fa-solid fa-layer-group text-teal-400 text-3xl"></i> Fabric IQ</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-diagram-project text-pink-400 text-3xl"></i> Graph/Ontology</div>
+                            <div class="f-icon-item w-[100%]"><i class="fa-solid fa-database text-blue-500 text-2xl"></i> One lake</div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow: Data Agents (Right from Data Platform to UX bottom) -->
+                    <div class="arrow-line arrow-h absolute top-[380px] left-[40%] w-[33%] border-r-2 border-[rgba(255,255,255,0.2)]" style="height: 0px;">
+                        <span class="arrow-label top-[-20px] left-[20%]">Data Agents</span>
+                        <div class="absolute top-[-40px] left-[70%] flex flex-col items-center">
+                            <i class="fa-solid fa-robot text-blue-400 text-2xl"></i>
+                            <span class="text-[10px] font-bold mt-1 text-slate-300">Agent 365</span>
+                        </div>
+                    </div>
+                    <!-- Upward turn for Data Agents arrow -->
+                    <div class="absolute top-[260px] left-[73%] w-[2px] h-[120px] bg-[rgba(255,255,255,0.2)]">
+                        <div class="absolute top-0 left-[-6px] text-[rgba(255,255,255,0.5)] text-[14px] transform rotate-[-90deg]">▶</div>
+                    </div>
+
+                    <!-- Arrow: Shortcut/Mirroring (Down to Data Sources) -->
+                    <div class="arrow-line arrow-v absolute top-[460px] left-[25%] h-[40px]">
+                        <span class="arrow-label top-[10px] left-[10px]">Shortcut/Mirroring</span>
+                    </div>
+
+                    <!-- Bottom Full: Data Sources -->
+                    <div class="foundry-bg absolute top-[500px] left-0 w-[73%] h-[90px]">
+                        <div class="foundry-title text-center">Data Sources</div>
+                        <div class="f-icon-grid" style="gap: 5px;">
+                            <div class="f-icon-item" style="width: 50px;"><i class="devicon-microsoftsqlserver-plain text-blue-400"></i> <span class="text-[8px]">SQL DB</span></div>
+                            <div class="f-icon-item" style="width: 50px;"><i class="devicon-azure-plain text-blue-300"></i> <span class="text-[8px]">Cosmos</span></div>
+                            <div class="f-icon-item" style="width: 50px;"><i class="fa-solid fa-server text-gray-400"></i> <span class="text-[8px]">ADX</span></div>
+                            <div class="f-icon-item" style="width: 50px;"><i class="devicon-mysql-plain text-blue-600"></i> <span class="text-[8px]">MySQL</span></div>
+                            <div class="f-icon-item" style="width: 50px;"><i class="devicon-postgresql-plain text-blue-500"></i> <span class="text-[8px]">Postgres</span></div>
+                            <div class="f-icon-item" style="width: 50px;"><i class="fa-solid fa-hard-drive text-teal-400"></i> <span class="text-[8px]">Storage</span></div>
+                            <div class="f-icon-item" style="width: 50px;"><i class="devicon-amazonwebservices-plain-wordmark text-orange-400"></i> <span class="text-[8px]">Aurora</span></div>
+                            <div class="f-icon-item" style="width: 50px;"><i class="devicon-googlecloud-plain text-blue-400"></i> <span class="text-[8px]">Big query</span></div>
+                            <div class="f-icon-item" style="width: 50px;"><i class="fa-solid fa-bucket text-orange-500"></i> <span class="text-[8px]">AWS Bucket</span></div>
+                            <div class="f-icon-item" style="width: 50px;"><i class="fa-solid fa-bucket text-blue-400"></i> <span class="text-[8px]">GCP Bucket</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Top Right: UX -->
+                    <div class="foundry-bg absolute top-[40px] left-[73%] w-[15%] h-[220px]">
+                        <div class="foundry-title text-center">UX</div>
+                        <div class="f-icon-grid flex-col items-center" style="gap: 15px;">
+                            <div class="f-icon-item"><i class="fa-solid fa-users-rectangle text-purple-600 text-2xl"></i> Teams</div>
+                            <div class="f-icon-item"><i class="fa-solid fa-comment-dots text-gradient text-2xl text-blue-300"></i> Copilot</div>
+                            <div class="flex gap-2">
+                                <div class="f-icon-item" style="width:40px;"><i class="fa-solid fa-globe text-blue-500"></i> App Services</div>
+                                <div class="f-icon-item" style="width:40px;"><i class="fa-solid fa-network-wired text-cyan-400"></i> APIM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rightmost Users -->
+                    <div class="absolute top-[80px] left-[92%] flex flex-col gap-6">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[#ccc] text-[18px]">➔</span>
+                            <div class="flex flex-col items-center text-[10px] text-cyan-400">
+                                <i class="fa-solid fa-user text-2xl"></i> Users
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[#ccc] text-[18px]">➔</span>
+                            <div class="flex flex-col items-center text-[10px] text-cyan-400">
+                                <i class="fa-solid fa-user text-2xl"></i> Users
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[#ccc] text-[18px] opacity-70">➔</span>
+                            <div class="flex flex-col items-center text-[10px] text-blue-400 text-center w-[50px]">
+                                <i class="fa-solid fa-table-cells text-2xl"></i> Enterprise Apps
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Slide 6: Escenario -->
+            <section>
+                <div class="p-10 card border-2 border-dashed border-slate-700 relative shadow-2xl">
+                    <div class="text-left mb-10">
+                        <p class="text-xs accent-teal font-mono tracking-widest uppercase mb-2">Usuario de Negocio (Natural Language)</p>
+                        <p class="text-4xl font-light italic text-white">"¿Cuál fue el margen de utilidad por región el último trimestre y qué factores lo afectaron?"</p>
+                    </div>
+                    <div class="text-right fragment">
+                        <p class="text-xs accent-purple font-mono tracking-widest uppercase mb-2">Agent Service + Fabric</p>
+                        <div class="p-6 bg-slate-900/80 rounded-2xl inline-block text-left border border-slate-700">
+                            <p class="text-2xl">"El margen consolidado fue del <strong class="text-white">18%</strong>. El factor principal fue el costo logístico en el Norte. He generado un reporte detallado en Power BI."</p>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 bg-blue-600 px-4 py-1 rounded text-xs font-bold uppercase">VALOR REAL</div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Cierre -->
+            <section data-background-gradient="linear-gradient(135deg, #0b1120 0%, #4f46e5 100%)">
+                <h1 class="text-7xl font-black mb-10 tracking-tighter">¿Listos para acelerar?</h1>
+                <div class="grid grid-cols-3 gap-6 text-center mb-10">
+                    <div><h2 class="accent-teal mb-2">01</h2><p class="text-sm font-bold uppercase">Unifica en Fabric</p></div>
+                    <div><h2 class="accent-teal mb-2">02</h2><p class="text-sm font-bold uppercase">Potencia con Foundry</p></div>
+                    <div><h2 class="accent-teal mb-2">03</h2><p class="text-sm font-bold uppercase">Lidera el Futuro</p></div>
+                </div>
+                <div class="text-xl opacity-90 mb-6 bg-black/20 p-4 rounded-lg border border-white/10 inline-block">
+                    Si estos servicios forman parte de su interés, por favor contacten a su <strong class="text-[#00f2ff]">ejecutivo de cuenta</strong><br>
+                    o manden correo a <a href="mailto:ebriseno@axtel.com.mx" class="text-blue-400 font-bold hover:underline">ebriseno@axtel.com.mx</a>.
+                </div>
+                <p class="text-xl opacity-60 italic">Gracias por su atención. <br><strong>Alestra + Microsoft Azure</strong></p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const deck = new Reveal({
+                hash: false, 
+                center: true,
+                transition: 'convex',
+                width: 1100,
+                height: 850,
+                margin: 0.1
+            });
+            deck.initialize();
+
+            deck.on('slidechanged', event => {
+                if (event.indexh === 1) initDataChart();
+                if (event.indexh === 2) initAIChart();
+            });
+        });
+
+        let dataChart = null;
+        let aiChart = null;
+
+        function initDataChart() {
+            const ctx = document.getElementById('dataChart').getContext('2d');
+            if (dataChart) dataChart.destroy();
+            dataChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Decisiones con Datos', 'Intuición / Manual'],
+                    datasets: [{
+                        data: [78, 22],
+                        backgroundColor: ['#00f2ff', 'rgba(255, 255, 255, 0.05)'],
+                        borderColor: ['#0b1120', '#0b1120'],
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: true, position: 'bottom', labels: { color: '#fff', font: { size: 16 } } }
+                    },
+                    cutout: '80%',
+                    animation: { duration: 2000, easing: 'easeOutQuart' }
+                }
+            });
+        }
+
+        function initAIChart() {
+            const ctx = document.getElementById('aiChart').getContext('2d');
+            if (aiChart) aiChart.destroy();
+            aiChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Bot Service (NLP)', 'Predictive ML', 'OCR / Vision', 'Foundry Agents'],
+                    datasets: [{
+                        data: [45, 38, 32, 50],
+                        backgroundColor: ['#00a4ef', '#605dec', '#00f2ff', '#4f46e5'],
+                        borderRadius: 12
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { display: false },
+                        y: { ticks: { color: '#fff', font: { size: 14, weight: 'bold' } }, grid: { display: false } }
+                    },
+                    plugins: { legend: { display: false } },
+                    animation: { duration: 2500 }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
