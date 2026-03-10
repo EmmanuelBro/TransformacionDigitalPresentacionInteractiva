@@ -215,6 +215,69 @@
             white-space: nowrap;
         }
 
+        /* Slide 6: Analitica de Datos e IA Styles */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 60% 38%;
+            gap: 2%;
+            height: 600px;
+            align-items: stretch;
+            text-align: left;
+        }
+        .analytics-panel {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+        }
+        .flow-col-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .flow-nodes-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            height: 100%;
+            position: relative;
+        }
+        .flow-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            z-index: 2;
+        }
+        .flow-node-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 9px;
+            text-align: center;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .flow-node-box i, .flow-node-box img, .flow-node-box svg { font-size: 20px; margin-bottom: 4px; }
+        
+        /* Specific connector background arrows */
+        .bg-arrow-line {
+            position: absolute;
+            background: rgba(255, 200, 0, 0.3); /* yellow-ish line */
+            z-index: 1;
+        }
+        .bg-arrow-anim {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #ffcc00, transparent);
+            animation: flowRight 2.5s linear infinite;
+        }
+
         .footer-fixed {
             position: fixed;
             bottom: 20px;
@@ -522,7 +585,230 @@
                 </div>
             </section>
 
-            <!-- Slide 6: Escenario -->
+            <!-- Slide 6: Analítica de Datos e IA -->
+            <section data-background-color="#0b1120">
+                <h2 class="mb-6 text-3xl text-left font-bold text-white">Analítica de <span class="text-blue-500">Datos</span> e <span class="text-blue-500">IA</span></h2>
+                
+                <div class="analytics-grid">
+                    <!-- Left Panel: Data Architecture -->
+                    <div class="analytics-panel bg-white text-black p-4 rounded-xl" style="background-color: #f8f9fa;">
+                        <div class="flow-nodes-container" style="color: #333;">
+                            
+                            <!-- COL 1: Data Sources -->
+                            <div class="flow-column">
+                                <div class="flow-col-title" style="color:transparent">_</div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                    <i class="fa-solid fa-tower-broadcast text-gray-500"></i>
+                                    <span class="font-bold">Streaming</span>
+                                    <span class="text-[7px] text-gray-500">IoT devices, stream</span>
+                                </div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white; margin-top: 20px;">
+                                    <i class="fa-regular fa-file-image text-gray-500"></i>
+                                    <span class="font-bold">Unstructured</span>
+                                    <span class="text-[7px] text-gray-500">images, video, free text</span>
+                                </div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                    <i class="fa-solid fa-code text-gray-500"></i>
+                                    <span class="font-bold">Semi-structured</span>
+                                    <span class="text-[7px] text-gray-500">CSV, logs, JSON</span>
+                                </div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white; margin-top: 20px;">
+                                    <i class="fa-solid fa-database text-gray-500"></i>
+                                    <span class="font-bold">Relational</span>
+                                    <span class="text-[7px] text-gray-500">(structured)</span>
+                                </div>
+                            </div>
+
+                            <!-- COL 2: Ingestar -->
+                            <div class="flow-column">
+                                <div class="flow-col-title text-gray-800">Ingestar</div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                    <i class="devicon-azure-plain text-blue-500"></i>
+                                    <span>Event Hub</span>
+                                </div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                    <i class="devicon-azure-plain text-blue-400"></i>
+                                    <span>IoT Hub</span>
+                                </div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white; margin-top: 100px;">
+                                    <i class="fa-solid fa-arrows-spin text-blue-500"></i>
+                                    <span>Pipe Lines</span>
+                                </div>
+                            </div>
+
+                            <!-- COL 3: Almacenar -->
+                            <div class="flow-column">
+                                <div class="flow-col-title text-gray-800">Almacenar</div>
+                                <div class="h-full flex items-center">
+                                    <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                        <i class="fa-solid fa-hard-drive text-blue-500"></i>
+                                        <span>Data Lake</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- COL 4: Procesar -->
+                            <div class="flow-column">
+                                <div class="flow-col-title text-gray-800">Procesar</div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                    <i class="fa-solid fa-water text-blue-400"></i>
+                                    <span>Stream Analytics</span>
+                                </div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                    <i class="fa-solid fa-cube text-red-500"></i>
+                                    <span>DataBricks</span>
+                                </div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                    <i class="fa-solid fa-server text-gray-500"></i>
+                                    <span>Serverless/Dedicados</span>
+                                </div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                    <i class="fa-solid fa-bolt text-blue-500"></i>
+                                    <span>Spark Pool</span>
+                                </div>
+                            </div>
+
+                            <!-- COL 5: Enriquecer -->
+                            <div class="flow-column">
+                                <div class="flow-col-title text-gray-800">Enriquecer</div>
+                                <div class="flow-node-box mt-[40px]" style="border-color: #ccc; background: white;">
+                                    <i class="fa-solid fa-brain text-blue-600"></i>
+                                    <span>Cognitive Services</span>
+                                </div>
+                                <div class="flow-node-box" style="border-color: #ccc; background: white;">
+                                    <i class="fa-solid fa-flask text-blue-500"></i>
+                                    <span>Machine Learning</span>
+                                </div>
+                            </div>
+
+                            <!-- COL 6: Servir -->
+                            <div class="flow-column">
+                                <div class="flow-col-title text-gray-800">Servir</div>
+                                <div class="h-full flex items-center">
+                                    <div class="flow-node-box" style="border-color: #ccc; background: #fdf5d3;">
+                                        <i class="fa-solid fa-chart-simple text-yellow-600"></i>
+                                        <span class="font-bold">Power BI</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Yellow Flow Lines (Background) -->
+                            <!-- Connect Fuentes to Ingestar -->
+                            <div class="bg-arrow-line" style="top: 80px; left: 16%; width: 5%; height: 2px;">
+                                <div class="bg-arrow-anim h-full w-[20px]"></div>
+                            </div>
+                            <div class="bg-arrow-line" style="top: 310px; left: 16%; width: 5%; height: 2px;">
+                                <div class="bg-arrow-anim h-full w-[20px]"></div>
+                            </div>
+                            <!-- Connect Ingestar to Almacenar vertically -->
+                            <div class="bg-arrow-line" style="top: 80px; left: 33%; width: 15%; height: 2px;">
+                                <div class="bg-arrow-anim h-full w-[40px]"></div>
+                            </div>
+                            <div class="bg-arrow-line" style="top: 80px; left: 48%; width: 2px; height: 160px; background: rgba(255, 200, 0, 0.3);"></div>
+                            <div class="bg-arrow-line" style="top: 310px; left: 33%; width: 17%; height: 2px;">
+                                <div class="bg-arrow-anim h-full w-[20px]"></div>
+                            </div>
+                            
+                            <!-- Connect Almacenar to Procesar -->
+                            <div class="bg-arrow-line" style="top: 240px; left: 58%; width: 5%; height: 2px;">
+                                <div class="bg-arrow-anim h-full w-[20px]"></div>
+                            </div>
+                            <!-- Procesar to Servir -->
+                            <div class="bg-arrow-line" style="top: 240px; left: 81%; width: 5%; height: 2px;">
+                                <div class="bg-arrow-anim h-full w-[20px]"></div>
+                            </div>
+
+                            <!-- Footer line text -->
+                            <div class="absolute bottom-[-10px] w-full text-center text-[10px] text-gray-500 font-bold bg-gray-200 p-1">
+                                Gobierno de Datos
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: AI & Value Prop -->
+                    <div class="flex flex-col gap-4">
+                        
+                        <!-- RAG Architecture Top -->
+                        <div class="analytics-panel bg-white text-black p-4 rounded-xl shadow-lg border-2 border-slate-200 h-[60%] flex items-center justify-center">
+                            <div class="relative w-full h-[90%] text-[8px] font-bold">
+                                <!-- Documents -->
+                                <div class="absolute top-[40%] left-0 flex flex-col gap-1">
+                                    <div class="bg-red-100 border border-red-300 p-1 rounded text-red-600 flex items-center gap-1"><i class="fa-regular fa-file-pdf"></i> PDF</div>
+                                    <div class="bg-blue-100 border border-blue-300 p-1 rounded text-blue-600 flex items-center gap-1"><i class="fa-regular fa-file-word"></i> Word</div>
+                                </div>
+                                <i class="fa-solid fa-arrow-right absolute top-[50%] left-[12%] text-gray-400"></i>
+                                
+                                <!-- Chunks & Embeddings -->
+                                <div class="absolute top-[20%] left-[18%] flex flex-col gap-1">
+                                    <i class="fa-solid fa-brain text-green-600 text-center mb-1 text-lg"></i>
+                                    <div class="flex gap-1 items-center">
+                                        <div class="bg-blue-100 rounded px-1 py-[2px]">chunk (texto)</div>
+                                        <div class="bg-blue-400 text-white rounded px-1 py-[2px]">embedding</div>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <div class="bg-blue-100 rounded px-1 py-[2px]">chunk (texto)</div>
+                                        <div class="bg-blue-400 text-white rounded px-1 py-[2px]">embedding</div>
+                                    </div>
+                                    <div class="flex gap-1 items-center">
+                                        <div class="bg-blue-100 rounded px-1 py-[2px]">chunk (texto)</div>
+                                        <div class="bg-blue-400 text-white rounded px-1 py-[2px]">embedding</div>
+                                    </div>
+                                </div>
+
+                                <i class="fa-solid fa-arrow-right absolute top-[50%] left-[45%] text-gray-400"></i>
+
+                                <!-- Semantic Search / Vector DB -->
+                                <div class="absolute top-[45%] left-[53%] flex flex-col items-center">
+                                    <div class="bg-blue-50 border border-blue-200 p-2 rounded flex flex-col items-center">
+                                        <i class="fa-solid fa-database text-blue-500 text-xl"></i>
+                                        <span class="mt-1">Búsqueda semántica</span>
+                                    </div>
+                                </div>
+
+                                <!-- Cloud / API / LLM Flow -->
+                                <div class="absolute top-0 right-0 w-[40%] h-full">
+                                    <i class="fa-solid fa-cloud text-blue-600 text-4xl absolute top-0 left-[20%]"></i>
+                                    
+                                    <div class="absolute top-[30%] left-0 bg-blue-500 text-white px-3 py-1 rounded shadow">API</div>
+                                    <div class="absolute top-[30%] right-[-10px] bg-gray-100 px-2 py-1 border border-gray-300 rounded whitespace-nowrap">App Service /<br>Serverless</div>
+                                    
+                                    <i class="fa-solid fa-arrow-down absolute top-[50%] left-[15%] text-gray-400"></i>
+                                    <i class="fa-solid fa-arrow-down absolute top-[50%] right-[10%] text-gray-400"></i>
+                                    
+                                    <!-- LLM / embedding arrows back -->
+                                    <div class="absolute top-[65%] right-[5%] flex flex-col items-center gap-1">
+                                        <div class="bg-blue-100 p-1 px-2 border border-blue-300 rounded flex flex-col items-center">
+                                            <i class="fa-solid fa-microchip text-blue-500 text-lg"></i> LLM
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- User Icons Top Right -->
+                                    <div class="absolute top-[5%] right-[-20px] flex gap-1">
+                                        <i class="fa-brands fa-whatsapp text-white bg-green-500 rounded p-[3px] text-xs"></i>
+                                        <i class="fa-solid fa-globe text-white bg-blue-500 rounded p-[3px] text-xs"></i>
+                                        <i class="fa-solid fa-users text-white bg-purple-500 rounded p-[3px] text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Value Proposition Bottom -->
+                        <div class="analytics-panel h-[40%] text-white text-left p-6">
+                            <h3 class="text-xl font-bold mb-4 border-b border-white/20 pb-2">Propuesta de Valor</h3>
+                            <ul class="list-disc pl-5 text-[14px] leading-relaxed space-y-2 text-slate-300">
+                                <li><strong>Servicio administrado</strong>.</li>
+                                <li>Toma de decisiones <strong class="text-blue-400">basadas en datos</strong>.</li>
+                                <li>Análisis <strong class="text-[#00f2ff]">descriptivo, exploratorio, predictivo y prescriptivo</strong> según las necesidades del negocio.</li>
+                                <li>Mejore el conocimiento del cliente.</li>
+                                <li>Optimice sus procesos y mejore sus tiempos.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Escenario -->
             <section>
                 <div class="p-10 card border-2 border-dashed border-slate-700 relative shadow-2xl">
                     <div class="text-left mb-10">
@@ -548,8 +834,8 @@
                     <div><h2 class="accent-teal mb-2">03</h2><p class="text-sm font-bold uppercase">Lidera el Futuro</p></div>
                 </div>
                 <div class="text-xl opacity-90 mb-6 bg-black/20 p-4 rounded-lg border border-white/10 inline-block">
-                    Si estos servicios forman parte de su interés, por favor contacten a su <strong class="text-[#00f2ff]">ejecutivo de cuenta</strong><br>
-                    o manden correo a <a href="mailto:ebriseno@axtel.com.mx" class="text-blue-400 font-bold hover:underline">ebriseno@axtel.com.mx</a>.
+                    Si estos servicios forman parte de su interés, por favor contacte a su <strong class="text-[#00f2ff]">ejecutivo de cuenta</strong><br>
+                    o mande correo a <a href="mailto:ebriseno@axtel.com.mx" class="text-blue-400 font-bold hover:underline">ebriseno@axtel.com.mx</a>.
                 </div>
                 <p class="text-xl opacity-60 italic">Gracias por su atención. <br><strong>Alestra + Microsoft Azure</strong></p>
             </section>
