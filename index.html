@@ -1028,21 +1028,24 @@
 
     <!-- Paginador Custom -->
     <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 flex gap-3 bg-slate-900/60 p-3 px-6 rounded-full backdrop-blur-md border border-white/10" id="custom-paginator">
-        <button class="paginator-dot active" onclick="Reveal.slide(0)" title="Portada"></button>
-        <button class="paginator-dot" onclick="Reveal.slide(1)" title="Valor del Dato"></button>
-        <button class="paginator-dot" onclick="Reveal.slide(2)" title="Valor de la IA"></button>
-        <button class="paginator-dot" onclick="Reveal.slide(3)" title="Arquitectura Analytics"></button>
-        <button class="paginator-dot" onclick="Reveal.slide(4)" title="Analítica de Datos e IA"></button>
-        <button class="paginator-dot" onclick="Reveal.slide(5)" title="Azure AI Foundry"></button>
-        <button class="paginator-dot" onclick="Reveal.slide(6)" title="Valor Real"></button>
-        <button class="paginator-dot" onclick="Reveal.slide(7)" title="Cierre"></button>
+        <button class="paginator-dot active" onclick="deck.slide(0)" title="Portada"></button>
+        <button class="paginator-dot" onclick="deck.slide(1)" title="Valor del Dato"></button>
+        <button class="paginator-dot" onclick="deck.slide(2)" title="Valor de la IA"></button>
+        <button class="paginator-dot" onclick="deck.slide(3)" title="Arquitectura Analytics"></button>
+        <button class="paginator-dot" onclick="deck.slide(4)" title="Analítica de Datos e IA"></button>
+        <button class="paginator-dot" onclick="deck.slide(5)" title="Azure AI Foundry"></button>
+        <button class="paginator-dot" onclick="deck.slide(6)" title="Valor Real"></button>
+        <button class="paginator-dot" onclick="deck.slide(7)" title="Cierre"></button>
     </div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
     <script>
+        // Hacer deck global para el paginador
+        let deck;
+        
         document.addEventListener('DOMContentLoaded', () => {
-            const deck = new Reveal({
+            deck = new Reveal({
                 hash: false, 
                 center: true,
                 transition: 'convex',
