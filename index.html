@@ -423,6 +423,47 @@
             box-shadow: 0 0 12px #00f2ff;
             transform: scale(1.3);
         }
+
+        /* --- DIAGRAM UNIFORM FONT SIZING (Based on Slide 6: Azure AI Foundry) --- */
+        /* 1. Stage Headers (Ingest, Serve, Development Hub, etc.) -> matches .foundry-label */
+        .pillar-label, .foundry-label, .glass-pipeline > div > div.text-\[10px\] {
+            font-size: 0.7rem !important; /* ~11px */
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 2px !important;
+            line-height: 1.2 !important;
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+        /* 2. Primary Node Titles (Data Factory, OneLake, PowerBI, Azure AI Foundry) */
+        .arch-node .text-lg, .node-box-large .text-sm, .foundry-node-main .text-2xl {
+            font-size: 1.25rem !important; /* 20px */
+            font-weight: bold !important;
+            line-height: 1.2 !important;
+            color: #ffffff !important;
+        }
+
+        /* 3. Secondary Nodes / Services (Cloud, DB, Streaming, AI Services, Output Apps) -> matches .foundry-pill text */
+        .arch-node span.text-\[12px\], .arch-node .bg-blue-900\/60, .arch-node .bg-blue-800\/60, .arch-node .bg-blue-700\/60,
+        .node-pill span, .node-pill span.font-bold, .foundry-pill span.text-xs, .node-box-large .text-md {
+            font-size: 0.85rem !important; /* ~13.5px */
+            font-weight: 700 !important;
+            color: #ffffff !important;
+        }
+
+        /* 4. Subtext / Descriptions -> matches .foundry-node-main p.text-xs */
+        .arch-node .text-\[11px\], .node-box-large .text-\[10px\], .foundry-node-main p.text-xs {
+            font-size: 0.75rem !important; /* 12px */
+            font-weight: normal !important;
+            opacity: 0.7 !important;
+            line-height: 1.3 !important;
+        }
+        
+        .has-tooltip .tooltip-box {
+            font-size: 0.75rem !important; /* 12px */
+            font-weight: normal !important;
+            line-height: 1.4 !important;
+        }
     </style>
 </head>
 <body>
