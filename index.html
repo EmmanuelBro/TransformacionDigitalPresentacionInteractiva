@@ -1090,12 +1090,19 @@
                 });
             });
 
-            deck.on('fragmentshown', event => {
-                // Initialize the chart only when its specific fragment is triggered on slide 6
-                if (event.fragment.hasAttribute('data-fragment-index') && event.fragment.getAttribute('data-fragment-index') === '2') {
-                    initPromptChart();
-                }
-            });
+            // Usar IntersectionObserver para renderizar la gráfica solo cuando el slide/fragmento sea visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        initPromptChart();
+                        observer.unobserve(entry.target); // Solo animar la primera vez
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const chartCanvas = document.getElementById('promptChart');
+            if(chartCanvas) observer.observe(chartCanvas);
+            
         });
 
         function initDataChart() {
