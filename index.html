@@ -402,6 +402,27 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Custom Paginator */
+        .paginator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .paginator-dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.2);
+        }
+        .paginator-dot.active {
+            background: #00f2ff;
+            box-shadow: 0 0 12px #00f2ff;
+            transform: scale(1.3);
+        }
     </style>
 </head>
 <body>
@@ -964,6 +985,18 @@
         </div>
     </div>
 
+    <!-- Paginador Custom -->
+    <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 flex gap-3 bg-slate-900/60 p-3 px-6 rounded-full backdrop-blur-md border border-white/10" id="custom-paginator">
+        <button class="paginator-dot active" onclick="Reveal.slide(0)" title="Portada"></button>
+        <button class="paginator-dot" onclick="Reveal.slide(1)" title="Valor del Dato"></button>
+        <button class="paginator-dot" onclick="Reveal.slide(2)" title="Valor de la IA"></button>
+        <button class="paginator-dot" onclick="Reveal.slide(3)" title="Arquitectura Analytics"></button>
+        <button class="paginator-dot" onclick="Reveal.slide(4)" title="Analítica de Datos e IA"></button>
+        <button class="paginator-dot" onclick="Reveal.slide(5)" title="Azure AI Foundry"></button>
+        <button class="paginator-dot" onclick="Reveal.slide(6)" title="Valor Real"></button>
+        <button class="paginator-dot" onclick="Reveal.slide(7)" title="Cierre"></button>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
     <script>
@@ -977,13 +1010,22 @@
                 margin: 0.1,
                 controls: true,
                 progress: true,
-                slideNumber: true
+                slideNumber: false
             });
             deck.initialize();
 
             deck.on('slidechanged', event => {
                 if (event.indexh === 1) initDataChart();
                 if (event.indexh === 2) initAIChart();
+                
+                // Actualizar Paginador Custom
+                document.querySelectorAll('.paginator-dot').forEach((dot, index) => {
+                    if (index === event.indexh) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
             });
         });
 
