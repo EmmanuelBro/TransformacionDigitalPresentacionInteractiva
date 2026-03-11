@@ -84,8 +84,8 @@
         /* --- Architecture Diagram Styles --- */
         .arch-container {
             display: grid;
-            grid-template-columns: 1fr 1fr 1.5fr 1fr;
-            gap: 25px;
+            grid-template-columns: 1fr auto 1fr auto 1.5fr auto 1fr;
+            gap: 15px;
             position: relative;
             padding: 20px;
             height: 520px;
@@ -241,12 +241,13 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 2rem;
-            padding: 2.5rem;
+            padding: 2rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 1rem;
+            gap: 1.5rem;
+            width: 100%;
         }
         .node-pill {
             display: flex;
@@ -622,7 +623,7 @@
                 <div class="relative w-full h-[450px] flex items-center justify-center p-2">
                     
                     <!-- Main Horizontal Pipeline -->
-                    <div class="glass-pipeline relative z-10 w-[95%] flex items-center justify-between gap-4">
+                    <div class="glass-pipeline relative z-10 w-full flex items-center justify-between gap-4">
                         
                         <!-- Background Connecting Thread -->
                         <div class="absolute inset-x-10 top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent z-0"></div>
@@ -659,12 +660,12 @@
                             <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Orquestación</div>
                             <div class="flex flex-col gap-3">
                                 <div class="node-pill border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.5)] bg-blue-500/20 scale-105 has-tooltip">
-                                    <img src="assets/icons/data-factory.svg" class="w-5 h-5" onerror="this.outerHTML='<i class=\'fa-solid fa-arrows-spin text-blue-400\'></i>'">
+                                    <i class="fa-solid fa-arrows-spin text-blue-400 text-2xl"></i>
                                     <span class="font-bold">Data Factory</span>
                                     <div class="tooltip-box">Motor de integración híbrida para mover y transformar datos.</div>
                                 </div>
                                 <div class="node-pill has-tooltip">
-                                    <img src="assets/icons/event-hubs.svg" class="w-5 h-5" onerror="this.outerHTML='<i class=\'fa-solid fa-bolt text-yellow-400\'></i>'">
+                                    <i class="fa-solid fa-bolt text-yellow-400 text-xl"></i>
                                     <span>Event Hubs</span>
                                     <div class="tooltip-box">Plataforma de streaming masivo para millones de eventos.</div>
                                 </div>
@@ -680,7 +681,7 @@
                         <div class="flex flex-col items-center gap-4 z-10 scale-110">
                             <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Repositorio Central</div>
                             <div class="node-box-large bg-blue-500/5 glow-blue border-blue-500/30 has-tooltip">
-                                <img src="assets/icons/data-lake.svg" class="w-16 h-16 mb-4" onerror="this.outerHTML='<i class=\'fa-solid fa-database text-teal-400 text-5xl\'></i>'">
+                                <i class="fa-solid fa-layer-group text-blue-400 text-6xl mb-4"></i>
                                 <span class="text-sm font-bold text-white">Data Lake</span>
                                 <span class="text-[10px] text-blue-300/60 mt-1">Single Source of Truth</span>
                                 <div class="tooltip-box">Repositorio central escalable basado en estándares abiertos.</div>
@@ -697,17 +698,17 @@
                             <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Transformación & AI</div>
                             <div class="flex flex-col gap-3">
                                 <div class="node-pill has-tooltip">
-                                    <img src="assets/icons/databricks.svg" class="w-5 h-5" onerror="this.outerHTML='<i class=\'fa-solid fa-fire-flame-curved text-orange-500\'></i>'">
+                                    <i class="fa-solid fa-fire-flame-curved text-orange-500 text-xl"></i>
                                     <span>Databricks / Spark</span>
                                     <div class="tooltip-box">Procesamiento de Big Data e IA colaborativa de alto rendimiento.</div>
                                 </div>
                                 <div class="node-pill has-tooltip">
-                                    <img src="assets/icons/synapse.svg" class="w-5 h-5" onerror="this.outerHTML='<i class=\'fa-solid fa-bolt text-yellow-500\'></i>'">
+                                    <i class="fa-solid fa-bolt text-yellow-500 text-xl"></i>
                                     <span>Synapse Analytics</span>
                                     <div class="tooltip-box">Análisis ilimitado que une Data Warehouse y Big Data.</div>
                                 </div>
                                 <div class="node-pill border-purple-500/50 bg-purple-500/10 has-tooltip">
-                                    <img src="assets/icons/cognitive-services.svg" class="w-5 h-5" onerror="this.outerHTML='<i class=\'fa-solid fa-brain text-purple-400\'></i>'">
+                                    <i class="fa-solid fa-brain text-purple-400 text-xl"></i>
                                     <span class="font-bold">AI Foundry</span>
                                     <div class="tooltip-box">Plataforma unificada para desarrollar y gestionar modelos de IA generativa.</div>
                                 </div>
@@ -723,7 +724,7 @@
                         <div class="flex flex-col items-center gap-4 z-10">
                             <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Inteligencia de Negocio</div>
                             <div class="node-box-large bg-yellow-500/5 border-yellow-500/30 has-tooltip">
-                                <img src="assets/icons/power-bi.svg" class="w-16 h-16 mb-4" onerror="this.outerHTML='<i class=\'fa-solid fa-chart-line text-yellow-500 text-5xl\'></i>'">
+                                <i class="fa-solid fa-chart-pie text-yellow-500 text-6xl mb-4"></i>
                                 <span class="text-sm font-bold text-white">Power BI</span>
                                 <span class="text-[10px] text-yellow-300/60 mt-1">Real-time Insights</span>
                                 <div class="tooltip-box">Analítica visual interactiva para decisiones basadas en datos.</div>
