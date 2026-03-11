@@ -937,18 +937,31 @@
                 <div class="flex items-center justify-center mb-8">
                     <h2 class="text-4xl m-0 title-glow">Valor <span class="accent-blue">Real Data + IA</span></h2>
                 </div>
-                <div class="p-10 card border-2 border-dashed border-slate-700 relative shadow-2xl">
-                    <div class="text-left mb-10">
-                        <p class="text-xs accent-teal font-mono tracking-widest uppercase mb-2">Usuario de Negocio (Natural Language)</p>
-                        <p class="text-4xl font-light italic text-white">"¿Cuál fue el margen de utilidad por región el último trimestre y qué factores lo afectaron?"</p>
-                    </div>
-                    <div class="text-right fragment">
-                        <p class="text-xs accent-purple font-mono tracking-widest uppercase mb-2">Agent Service + Fabric</p>
-                        <div class="p-6 bg-slate-900/80 rounded-2xl inline-block text-left border border-slate-700">
-                            <p class="text-2xl">"El margen consolidado fue del <strong class="text-white">18%</strong>. El factor principal fue el costo logístico en el Norte. He generado un reporte detallado en Power BI."</p>
+                <div class="grid grid-cols-2 gap-8 items-center h-[500px]">
+                    <!-- Left Column: Chat -->
+                    <div class="p-8 card border-2 border-dashed border-slate-700 relative shadow-2xl h-full flex flex-col justify-center">
+                        <div class="text-left mb-10">
+                            <p class="text-[10px] accent-teal font-mono tracking-widest uppercase mb-2">Usuario de Negocio (Natural Language)</p>
+                            <p class="text-2xl font-light italic text-white line-clamp-4">"¿Cuál fue el margen de utilidad por región el último trimestre y qué factores lo afectaron?"</p>
+                        </div>
+                        <div class="text-right fragment" data-fragment-index="1">
+                            <p class="text-[10px] accent-purple font-mono tracking-widest uppercase mb-2">Agent Service + Fabric</p>
+                            <div class="p-4 bg-slate-900/80 rounded-2xl inline-block text-left border border-slate-700">
+                                <p class="text-sm">"El margen consolidado fue del <strong class="text-white">18%</strong>. El factor principal fue el costo logístico en el Norte. He generado un reporte detallado en Power BI."</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="absolute -top-4 -right-4 bg-blue-600 px-4 py-1 rounded text-xs font-bold uppercase">VALOR REAL DATA + IA</div>
+
+                    <!-- Right Column: Generated Chart -->
+                    <div class="p-6 card border border-slate-700 bg-slate-900/40 relative shadow-2xl h-full flex flex-col fragment fade-up" data-fragment-index="2">
+                        <div class="flex items-center gap-3 border-b border-white/10 pb-3 mb-4">
+                            <i class="fa-solid fa-chart-simple text-purple-400"></i>
+                            <span class="text-xs font-bold text-white uppercase tracking-widest">Reporte Generado</span>
+                        </div>
+                        <div class="w-full flex-grow relative" style="min-height: 300px;">
+                            <canvas id="promptChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -1045,6 +1058,10 @@
         // Hacer deck global para el paginador
         let deck;
         
+        let dataChart = null;
+        let aiChart = null;
+        let promptChart = null;
+
         document.addEventListener('DOMContentLoaded', () => {
             deck = new Reveal({
                 hash: false, 
@@ -1072,10 +1089,14 @@
                     }
                 });
             });
-        });
 
-        let dataChart = null;
-        let aiChart = null;
+            deck.on('fragmentshown', event => {
+                // Initialize the chart only when its specific fragment is triggered on slide 6
+                if (event.fragment.hasAttribute('data-fragment-index') && event.fragment.getAttribute('data-fragment-index') === '2') {
+                    initPromptChart();
+                }
+            });
+        });
 
         function initDataChart() {
             const ctx = document.getElementById('dataChart').getContext('2d');
@@ -1126,6 +1147,50 @@
                     },
                     plugins: { legend: { display: false } },
                     animation: { duration: 2500 }
+                }
+            });
+        }
+
+        function initPromptChart() {
+            const ctx = document.getElementById('promptChart').getContext('2d');
+            if (promptChart) promptChart.destroy();
+            promptChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Sur', 'Centro', 'Occidente', 'Norte'],
+                    datasets: [
+                        {
+                            label: 'Margen (%)',
+                            data: [22, 19, 24, 12],
+                            backgroundColor: ['#10b981', '#10b981', '#10b981', '#ef4444'], // Red for the problem region
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)' }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            max: 30,
+                            ticks: { color: '#8da4c9', font: { size: 12 } },
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            title: { display: true, text: 'Margen de Utilidad (%)', color: '#fff', font: {size: 10} }
+                        },
+                        x: { 
+                            ticks: { color: '#fff', font: { size: 12, weight: 'bold' } },
+                            grid: { display: false }
+                        }
+                    },
+                    animation: {
+                        duration: 3500,
+                        easing: 'easeOutQuart'
+                    }
                 }
             });
         }
