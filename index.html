@@ -65,6 +65,7 @@
         .title-glow {
             position: relative;
             display: inline-block;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         }
         .title-glow::after {
             content: '';
@@ -72,9 +73,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 140%;
-            height: 140%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            width: 160%;
+            height: 180%;
+            background: radial-gradient(ellipse, rgba(0, 242, 255, 0.25) 0%, rgba(96, 93, 236, 0.15) 40%, transparent 70%);
+            filter: blur(10px);
             z-index: -1;
             pointer-events: none;
         }
@@ -429,7 +431,18 @@
 
             <!-- Slide 2: Valor del Dato -->
             <section>
-                <h2 class="mb-10 text-4xl">Impacto del <span class="accent-teal">Valor del Dato</span></h2>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-4xl m-0 title-glow">Impacto del <span class="accent-teal">Valor del Dato</span></h2>
+                </div>
+
+                <!-- Informational Card -->
+                <div class="mb-6 mx-10 p-3 bg-blue-900/20 border-l-4 border-blue-500 rounded-r-xl flex items-center gap-3 text-left">
+                    <i class="fa-solid fa-circle-info text-blue-400 text-xl pt-1"></i>
+                    <p class="text-[13px] leading-relaxed text-blue-100 m-0">
+                        <strong>Evolución Estratégica:</strong> Transformamos silos de información en flujos de valor continuo, permitiendo que cada decisión clave sea impulsada por evidencia y no por intuición.
+                    </p>
+                </div>
+
                 <div class="grid grid-cols-2 gap-10 items-center">
                     <div class="card h-[450px] flex flex-col justify-center items-center">
                         <h4 class="text-sm uppercase font-bold accent-blue mb-4 text-center">Eficacia en Decisiones Estratégicas</h4>
@@ -499,8 +512,17 @@
 
             <!-- Slide 4: Arquitectura End-to-End -->
             <section>
-                <h2 class="mb-6 title-glow">Arquitectura Moderna de <span class="accent-purple">Analytics</span></h2>
-                <div class="arch-container">
+                <h2 class="mb-4 title-glow">Arquitectura Moderna de <span class="accent-purple">Analytics</span></h2>
+                
+                <!-- Informational Card -->
+                <div class="mb-2 mx-10 p-3 bg-white/5 border-l-4 border-blue-400 rounded-r-xl flex items-center gap-4 text-left">
+                    <i class="fa-solid fa-cube text-blue-400 text-xl"></i>
+                    <p class="text-[13px] opacity-80 leading-snug m-0">
+                        <strong>Arquitectura Unificada:</strong> Flujo moderno que conecta orígenes con OneLake, eliminando redundancias para decisiones rápidas.
+                    </p>
+                </div>
+
+                <div class="arch-container" style="height: 450px; padding: 10px;">
                     
                     <!-- Pilar 0: Fuentes -->
                     <div class="arch-pillar transform translate-y-[20px]">
@@ -577,26 +599,27 @@
                         </div>
                     </div>
                 </div>
-                <!-- Informational Card -->
-                <div class="mt-6 mx-10 p-4 bg-white/5 border-l-4 border-blue-400 rounded-r-xl flex items-center gap-4 text-left">
-                    <i class="fa-solid fa-cube text-blue-400"></i>
-                    <p class="text-[13px] opacity-80 leading-snug">
-                        <strong>Arquitectura Unificada:</strong> Un flujo moderno que conecta cualquier origen de datos con OneLake, eliminando redundancias y proporcionando una base sólida para analítica escalable y democratización de insights.
-                    </p>
-                </div>
-                <p class="text-[14px] mt-4 opacity-50 font-medium">Flujo automatizado de datos: De la ingesta cruda a la visualización estratégica.</p>
+                <p class="text-[14px] mt-2 opacity-50 font-medium">Flujo automatizado de datos: De la ingesta cruda a la visualización estratégica.</p>
             </section>
 
             <!-- Slide 5: Analítica de Datos e IA (Refined & Best Distributed) -->
             <section data-background-color="#0b1120">
-                <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center justify-between mb-4">
                     <h2 class="text-4xl font-bold text-white m-0 title-glow">Analítica de <span class="text-blue-500">Datos</span> e <span class="text-blue-400">IA</span></h2>
                     <div class="px-6 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full">
                         <span class="text-xs font-mono text-blue-300 uppercase tracking-widest">End-to-End Modern Data Estate</span>
                     </div>
                 </div>
                 
-                <div class="relative w-full h-[540px] flex items-center justify-center p-2">
+                <!-- Informational Card -->
+                <div class="mb-2 mx-6 p-3 bg-blue-900/20 border-l-4 border-blue-500 rounded-r-xl flex items-center gap-3 text-left">
+                    <i class="fa-solid fa-microchip text-blue-400 text-xl pt-1"></i>
+                    <p class="text-[12px] leading-relaxed text-blue-100 m-0">
+                        <strong>Contexto Estratégico:</strong> Pipeline que prioriza la escalabilidad, integrando servicios nativos para transformar datos en activos de IA listos para el negocio.
+                    </p>
+                </div>
+
+                <div class="relative w-full h-[450px] flex items-center justify-center p-2">
                     
                     <!-- Main Horizontal Pipeline -->
                     <div class="glass-pipeline relative z-10 w-[95%] flex items-center justify-between gap-4">
@@ -696,16 +719,6 @@
                             <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
                         </div>
 
-                    <!-- Informational Card -->
-                    <div class="absolute top-4 right-10 w-72 p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded-r-xl backdrop-blur-md z-20">
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-microchip text-blue-400 mt-1"></i>
-                            <p class="text-[11px] text-left leading-relaxed text-blue-100">
-                                <strong>Contexto Estratégico:</strong> Este pipeline de extremo a extremo prioriza la escalabilidad y la inteligencia aplicada, integrando servicios nativos de Azure para transformar datos crudos en activos de IA listos para el negocio.
-                            </p>
-                        </div>
-                    </div>
-
                         <!-- 5. SERVIR -->
                         <div class="flex flex-col items-center gap-4 z-10">
                             <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Inteligencia de Negocio</div>
@@ -758,25 +771,23 @@
 
             <!-- Slide 6: Azure AI Foundry Architecture (Simplified High-Level) -->
             <section data-background-color="#0b1120">
-                <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center justify-between mb-4">
                     <h2 class="text-4xl font-bold text-white m-0 title-glow">Azure <span class="text-purple-500">AI Foundry</span></h2>
                     <div class="px-6 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full">
                         <span class="text-xs font-mono text-purple-300 uppercase tracking-widest">High-Level AI Architecture</span>
                     </div>
                 </div>
 
-                <div class="relative w-full h-[540px] flex items-center justify-center p-4">
-                    
-                    <!-- Informational Card -->
-                    <div class="absolute top-4 left-4 w-64 p-4 bg-purple-900/20 border-l-4 border-purple-400 rounded-r-xl backdrop-blur-md z-20">
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-wand-magic-sparkles text-purple-400 mt-1"></i>
-                            <p class="text-[11px] text-left leading-relaxed text-purple-100">
-                                <strong>IA Generativa a Escala:</strong> Proporcionamos un entorno seguro y gobernado para orquestar agentes, LLMs y servicios cognitivos, garantizando que cada solución de IA sea ética, precisa y alineada a los objetivos corporativos.
-                            </p>
-                        </div>
-                    </div>
+                <!-- Informational Card -->
+                <div class="mb-2 mx-6 p-3 bg-purple-900/20 border-l-4 border-purple-400 rounded-r-xl flex items-center gap-3 text-left">
+                    <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-xl pt-1"></i>
+                    <p class="text-[12px] leading-relaxed text-purple-100 m-0">
+                        <strong>IA Generativa a Escala:</strong> Entorno seguro y gobernado para orquestar agentes, LLMs y servicios cognitivos alineados a los objetivos corporativos.
+                    </p>
+                </div>
 
+                <div class="relative w-full h-[460px] flex items-center justify-center p-4">
+                    
                     <!-- Main Foundry Pipeline -->
                     <div class="foundry-pipeline relative z-10 flex items-center justify-between gap-8">
                         
@@ -919,7 +930,7 @@
                                 </li>
                                 <li class="flex items-center gap-3">
                                     <i class="fa-solid fa-check-circle text-teal-400"></i>
-                                    <span class="text-sm font-semibold text-white">Conectividad de Ultra Baja Latencia a Azure</span>
+                                    <span class="text-sm font-semibold text-white">Conexiones Dedicadas a Múltiples Fuentes de Datos</span>
                                 </li>
                                 <li class="flex items-center gap-3">
                                     <i class="fa-solid fa-check-circle text-teal-400"></i>
