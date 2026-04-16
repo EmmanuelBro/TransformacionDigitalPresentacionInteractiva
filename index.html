@@ -305,12 +305,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.8rem;
-            padding: 1.5rem;
+            gap: 0.6rem;
+            padding: 1rem;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 2rem;
-            width: 180px;
+            border-radius: 1.5rem;
+            width: 115px;
             transition: all 0.3s ease;
         }
         .foundry-pill:hover {
@@ -319,7 +319,7 @@
             transform: translateY(-5px);
         }
         .foundry-pill i, .foundry-pill img {
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
         .foundry-node-main {
             display: flex;
@@ -816,94 +816,137 @@
             <section>
                 <h2 class="mb-4 title-glow">Arquitectura <span class="accent-purple">Analytics</span></h2>
                 
-                <!-- Informational Card -->
-                <div class="mb-2 mx-10 p-3 bg-white/5 border-l-4 border-blue-400 rounded-r-xl flex items-center gap-4 text-left">
-                    <i class="fa-solid fa-cube text-blue-400 text-xl"></i>
-                    <p class="text-[13px] opacity-80 leading-snug m-0">
-                        <strong>Arquitectura Unificada:</strong> Flujo moderno que conecta orígenes con OneLake, eliminando redundancias para decisiones rápidas.
-                    </p>
+                <div class="grid grid-cols-[1fr_360px] gap-4 items-center relative -ml-4">
+                    <!-- Columna Izquierda: Diagrama Visual -->
+                    <div class="flex flex-col relative w-full min-w-0 h-[480px] justify-center scale-[0.85] origin-left">
+                        <div class="arch-container relative" style="height: 480px; padding: 10px;">
+                            
+                            <!-- Pilar 0: Fuentes -->
+                            <div class="arch-pillar transform translate-y-[10px]">
+                                <div class="pillar-label text-[14px]">Fuentes</div>
+                                <div class="arch-node has-tooltip">
+                                    <div class="flex gap-3 mb-1">
+                                        <i class="devicon-amazonwebservices-plain-wordmark text-3xl" style="color: #ff9900;"></i>
+                                        <i class="devicon-googlecloud-plain text-3xl" style="color: #4285F4;"></i>
+                                    </div>
+                                    <span class="text-[12px]">Cloud (AWS/GCP)</span>
+                                    <div class="tooltip-box">Integración nativa con nubes externas para ingesta de datos multicloud.</div>
+                                </div>
+                                <div class="arch-node has-tooltip">
+                                    <div class="flex gap-3 mb-1">
+                                        <i class="devicon-microsoftsqlserver-plain text-3xl" style="color: #cc292b;"></i>
+                                        <i class="devicon-oracle-original text-3xl" style="color: #F80000;"></i>
+                                    </div>
+                                    <span class="text-[12px]">On-Premise DB</span>
+                                    <div class="tooltip-box">Conectividad segura a bases de datos locales mediante gateways.</div>
+                                </div>
+                                <div class="arch-node has-tooltip">
+                                    <i class="fa-solid fa-file-csv text-3xl mb-1 text-green-400"></i>
+                                    <span class="text-[12px]">Sistemas ERP/CSV</span>
+                                    <div class="tooltip-box">Extracción de datos desde sistemas legacy, archivos planos y ERPs.</div>
+                                </div>
+                            </div>
+
+                            <!-- Flecha 1: Ingest -->
+                            <div class="flex items-center pb-[75px]">
+                                <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
+                            </div>
+
+                            <div class="arch-pillar pb-[75px]">
+                                <div class="pillar-label">Ingest</div>
+                                <div class="arch-node node-main h-full has-tooltip">
+                                    <i class="fa-solid fa-arrows-spin icon-factory"></i>
+                                    <div class="font-bold text-lg">Data Factory</div>
+                                    <div class="text-[11px] opacity-70 mt-1">ETL & Pipelines</div>
+                                    <div class="tooltip-box">Orquestador de datos para crear, programar y administrar flujos ETL a gran escala.</div>
+                                </div>
+                            </div>
+
+                            <!-- Flecha 2: Store (OneLake) -->
+                            <div class="flex items-center pb-[75px]">
+                                <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
+                            </div>
+
+                            <div class="arch-pillar pb-[75px]">
+                                <div class="pillar-label">Store</div>
+                                <div class="arch-node node-main h-full flex flex-col gap-3 has-tooltip">
+                                    <i class="fa-solid fa-layer-group icon-onelake"></i>
+                                    <div class="font-bold text-lg">OneLake</div>
+                                    <div class="grid grid-cols-1 gap-2 w-full px-3">
+                                        <div class="bg-blue-900/60 rounded-lg p-2 font-bold text-[12px]">Gold (Analytics)</div>
+                                        <div class="bg-blue-800/60 rounded-lg p-2 font-bold text-[12px]">Silver (Refined)</div>
+                                        <div class="bg-blue-700/60 rounded-lg p-2 font-bold text-[12px]"> Bronze (Raw)</div>
+                                    </div>
+                                    <div class="tooltip-box">Un solo lago de datos unificado tipo "OneDrive para datos" que elimina silos.</div>
+                                </div>
+                            </div>
+
+                            <!-- Flecha 3: Serve -->
+                            <div class="flex items-center pb-[75px]">
+                                <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
+                            </div>
+
+                            <div class="arch-pillar pb-[75px]">
+                                <div class="pillar-label">Serve</div>
+                                <div class="arch-node node-main h-full has-tooltip">
+                                    <i class="fa-solid fa-chart-pie icon-powerbi"></i>
+                                    <div class="font-bold text-lg">Power BI</div>
+                                    <div class="text-[11px] opacity-70 mt-1">Dashboards & Insights</div>
+                                    <div class="tooltip-box">Plataforma líder de visualización para democratizar insights en toda la empresa.</div>
+                                </div>
+                            </div>
+
+                            <!-- Flow lines background -->
+                            <div class="flow-path" style="left: 20%; width: 55%; top: 35%; z-index: 0;"><div class="flow-line-anim"></div></div>
+                            <div class="flow-path" style="left: 20%; width: 55%; top: 60%; z-index: 0;"><div class="flow-line-anim" style="animation-delay: 1.2s;"></div></div>
+
+                            <!-- [NEW] Microsoft Purview -->
+                            <div class="absolute -bottom-2 inset-x-8 z-20">
+                                <div class="bg-purple-900/40 border border-purple-500/30 rounded-2xl p-3 flex items-center justify-between backdrop-blur-md">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-shield-halved text-purple-400"></i>
+                                        <span class="text-[11px] font-bold text-white tracking-widest uppercase">Microsoft Purview</span>
+                                    </div>
+                                    <div class="flex gap-6">
+                                        <span class="text-[10px] text-purple-200">Gobernanza End-to-End</span>
+                                        <span class="text-[10px] text-purple-200">Cumplimiento</span>
+                                        <span class="text-[10px] text-purple-200">Linaje de Datos</span>
+                                    </div>
+                                    <div class="flex gap-1">
+                                        <div class="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse"></div>
+                                        <div class="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse [animation-delay:0.2s]"></div>
+                                        <div class="w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse [animation-delay:0.4s]"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Panel de Resumen -->
+                    <div class="flex flex-col text-left justify-center pr-4 h-[480px] -ml-20">
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md h-[360px] flex flex-col justify-center">
+                            <div class="text-[14px] font-bold mb-4 text-blue-400 flex items-center gap-2 uppercase tracking-widest"><i class="fa-solid fa-cube"></i> Visión General</div>
+                            <ul class="space-y-4 text-[13px] leading-snug text-slate-300">
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-500 mt-0.5"></i>
+                                    <span><strong>Fabric:</strong> Ingesta a consumo de datos unificada en OneLake.</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-500 mt-0.5"></i>
+                                    <span><strong>Power BI:</strong> Toma de decisiónes nativas</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-500 mt-0.5"></i>
+                                    <span><strong>Copilot:</strong> Listo desde las licencias base (IA generativa).</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-500 mt-0.5"></i>
+                                    <span><strong>Purview:</strong> Linaje, auditoría y protección automática.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="arch-container" style="height: 450px; padding: 10px;">
-                    
-                    <!-- Pilar 0: Fuentes -->
-                    <div class="arch-pillar transform translate-y-[20px]">
-                        <div class="pillar-label text-[14px]">Fuentes</div>
-                        <div class="arch-node has-tooltip">
-                            <div class="flex gap-3 mb-1">
-                                <i class="devicon-amazonwebservices-plain-wordmark text-3xl" style="color: #ff9900;"></i>
-                                <i class="devicon-googlecloud-plain text-3xl" style="color: #4285F4;"></i>
-                            </div>
-                            <span class="text-[12px]">Cloud (AWS/GCP)</span>
-                            <div class="tooltip-box">Integración nativa con nubes externas para ingesta de datos multicloud.</div>
-                        </div>
-                        <div class="arch-node has-tooltip">
-                            <div class="flex gap-3 mb-1">
-                                <i class="devicon-microsoftsqlserver-plain text-3xl" style="color: #cc292b;"></i>
-                                <i class="devicon-oracle-original text-3xl" style="color: #F80000;"></i>
-                            </div>
-                            <span class="text-[12px]">On-Premise DB</span>
-                            <div class="tooltip-box">Conectividad segura a bases de datos locales mediante gateways.</div>
-                        </div>
-                        <div class="arch-node has-tooltip">
-                            <i class="fa-solid fa-file-csv text-3xl mb-1 text-green-400"></i>
-                            <span class="text-[12px]">Sistemas ERP/CSV</span>
-                            <div class="tooltip-box">Extracción de datos desde sistemas legacy, archivos planos y ERPs.</div>
-                        </div>
-                    </div>
-
-                    <!-- Pilar 1: Ingest -->
-                    <div class="flex items-center">
-                        <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
-                    </div>
-
-                    <div class="arch-pillar">
-                        <div class="pillar-label">Ingest</div>
-                        <div class="arch-node node-main h-full has-tooltip">
-                            <i class="fa-solid fa-arrows-spin icon-factory"></i>
-                            <div class="font-bold text-lg">Data Factory</div>
-                            <div class="text-[11px] opacity-70 mt-1">ETL & Pipelines</div>
-                            <div class="tooltip-box">Orquestador de datos para crear, programar y administrar flujos ETL a gran escala.</div>
-                        </div>
-                    </div>
-
-                    <!-- Pilar 2: Store (OneLake) -->
-                    <div class="flex items-center">
-                        <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
-                    </div>
-
-                    <div class="arch-pillar">
-                        <div class="pillar-label">Store</div>
-                        <div class="arch-node node-main h-full flex flex-col gap-3 has-tooltip">
-                            <i class="fa-solid fa-layer-group icon-onelake"></i>
-                            <div class="font-bold text-lg">OneLake</div>
-                            <div class="grid grid-cols-1 gap-2 w-full px-3">
-                                <div class="bg-blue-900/60 rounded-lg p-2 font-bold text-[12px]">Gold (Analytics)</div>
-                                <div class="bg-blue-800/60 rounded-lg p-2 font-bold text-[12px]">Silver (Refined)</div>
-                                <div class="bg-blue-700/60 rounded-lg p-2 font-bold text-[12px]">Bronze (Raw)</div>
-                            </div>
-                            <div class="tooltip-box">Un solo lago de datos unificado tipo "OneDrive para datos" que elimina silos.</div>
-                        </div>
-                    </div>
-
-                    <!-- Pilar 3: Serve -->
-                    <div class="flex items-center">
-                        <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
-                    </div>
-
-                    <div class="arch-pillar">
-                        <div class="pillar-label">Serve</div>
-                        <div class="arch-node node-main h-full has-tooltip">
-                            <i class="fa-solid fa-chart-pie icon-powerbi"></i>
-                            <div class="font-bold text-lg">Power BI</div>
-                            <div class="text-[11px] opacity-70 mt-1">Dashboards & Insights</div>
-                            <div class="tooltip-box">Plataforma líder de visualización para democratizar insights en toda la empresa.</div>
-                        </div>
-                    <!-- Flow lines background -->
-                    <div class="flow-path" style="left: 20%; width: 55%; top: 40%; z-index: 0;"><div class="flow-line-anim"></div></div>
-                    <div class="flow-path" style="left: 20%; width: 55%; top: 65%; z-index: 0;"><div class="flow-line-anim" style="animation-delay: 1.2s;"></div></div>
-                </div>
-                <p class="text-[14px] mt-2 opacity-50 font-medium">Flujo automatizado de datos: De la ingesta cruda a la visualización estratégica.</p>
             </section>
 
             <!-- Slide 5: Analítica de Datos e IA (Refined & Best Distributed) -->
@@ -915,159 +958,180 @@
                     </div>
                 </div>
                 
-                <!-- Informational Card -->
-                <div class="mb-2 mx-6 p-3 bg-blue-900/20 border-l-4 border-blue-500 rounded-r-xl flex items-center gap-3 text-left">
-                    <i class="fa-solid fa-microchip text-blue-400 text-xl pt-1"></i>
-                    <p class="text-[12px] leading-relaxed text-blue-100 m-0">
-                        <strong>Contexto Estratégico:</strong> Pipeline que prioriza la escalabilidad, integrando servicios nativos para transformar datos en activos de IA listos para el negocio.
-                    </p>
-                </div>
+                <div class="grid grid-cols-[1fr_360px] gap-4 items-center relative">
+                    <!-- Columna Izquierda: Diagrama Visual -->
+                    <div class="flex flex-col relative w-full min-w-0 h-[480px] justify-center scale-[0.75] origin-[15%]">
+                        <div class="relative w-full h-[450px] flex items-center justify-center p-2 overflow-visible">
+                            
+                            <!-- Main Horizontal Pipeline -->
+                            <div class="glass-pipeline relative z-10 w-[1150px] flex items-center justify-between gap-4">
+                                
+                                <!-- Background Connecting Thread -->
+                                <div class="absolute inset-x-10 top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent z-0"></div>
 
-                <div class="relative w-full h-[450px] flex items-center justify-center p-2">
-                    
-                    <!-- Main Horizontal Pipeline -->
-                    <div class="glass-pipeline relative z-10 w-full flex items-center justify-between gap-4">
-                        
-                        <!-- Background Connecting Thread -->
-                        <div class="absolute inset-x-10 top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent z-0"></div>
+                                <!-- 1. FUENTES -->
+                                <div class="flex flex-col items-center gap-4 z-10">
+                                    <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Ingesta de Origen</div>
+                                    <div class="flex flex-col gap-2">
+                                        <div class="node-pill hover:bg-blue-500/10 has-tooltip">
+                                            <i class="fa-solid fa-tower-broadcast text-blue-400 w-5"></i>
+                                            <span>Streaming / IoT</span>
+                                            <div class="tooltip-box">Captura de eventos en tiempo real desde dispositivos y sensores.</div>
+                                        </div>
+                                        <div class="node-pill hover:bg-teal-500/10 has-tooltip">
+                                            <i class="fa-solid fa-database text-teal-400 w-5"></i>
+                                            <span>Relational DB</span>
+                                            <div class="tooltip-box">Fuentes estructuradas tradicionales como SQL Server u Oracle.</div>
+                                        </div>
+                                        <div class="node-pill hover:bg-purple-500/10 has-tooltip">
+                                            <i class="fa-solid fa-file-code text-purple-400 w-5"></i>
+                                            <span>Semi-Structured</span>
+                                            <div class="tooltip-box">Archivos JSON, XML y datos de aplicaciones SaaS.</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <!-- 1. FUENTES -->
-                        <div class="flex flex-col items-center gap-4 z-10">
-                            <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Ingesta de Origen</div>
-                            <div class="flex flex-col gap-2">
-                                <div class="node-pill hover:bg-blue-500/10 has-tooltip">
-                                    <i class="fa-solid fa-tower-broadcast text-blue-400 w-5"></i>
-                                    <span>Streaming / IoT</span>
-                                    <div class="tooltip-box">Captura de eventos en tiempo real desde dispositivos y sensores.</div>
+                                <!-- Flecha 1 -->
+                                <div class="flex items-center z-10">
+                                    <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
                                 </div>
-                                <div class="node-pill hover:bg-teal-500/10 has-tooltip">
-                                    <i class="fa-solid fa-database text-teal-400 w-5"></i>
-                                    <span>Relational DB</span>
-                                    <div class="tooltip-box">Fuentes estructuradas tradicionales como SQL Server u Oracle.</div>
+
+                                <!-- 2. INGESTAR (Data Factory Highlighted) -->
+                                <div class="flex flex-col items-center gap-4 z-10">
+                                    <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Orquestación</div>
+                                    <div class="flex flex-col gap-3">
+                                        <div class="node-pill border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.5)] bg-blue-500/20 scale-105 has-tooltip">
+                                            <i class="fa-solid fa-arrows-spin text-blue-400 text-2xl"></i>
+                                            <span class="font-bold">Data Factory</span>
+                                            <div class="tooltip-box">Motor de integración híbrida para mover y transformar datos.</div>
+                                        </div>
+                                        <div class="node-pill has-tooltip">
+                                            <i class="fa-solid fa-bolt text-yellow-400 text-xl"></i>
+                                            <span>Event Hubs</span>
+                                            <div class="tooltip-box">Plataforma de streaming masivo para millones de eventos.</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="node-pill hover:bg-purple-500/10 has-tooltip">
-                                    <i class="fa-solid fa-file-code text-purple-400 w-5"></i>
-                                    <span>Semi-Structured</span>
-                                    <div class="tooltip-box">Archivos JSON, XML y datos de aplicaciones SaaS.</div>
+
+                                <!-- Flecha 2 -->
+                                <div class="flex items-center z-10">
+                                    <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
                                 </div>
+
+                                <!-- 3. ALMACENAR -->
+                                <div class="flex flex-col items-center gap-4 z-10 scale-110">
+                                    <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Repositorio Central</div>
+                                    <div class="node-box-large bg-blue-500/5 glow-blue border-blue-500/30 has-tooltip">
+                                        <i class="fa-solid fa-layer-group text-blue-400 text-6xl mb-4"></i>
+                                        <span class="text-sm font-bold text-white">Data Lake</span>
+                                        <span class="text-[10px] text-blue-300/60 mt-1">Single Source of Truth</span>
+                                        <div class="tooltip-box">Repositorio central escalable basado en estándares abiertos.</div>
+                                    </div>
+                                </div>
+
+                                <!-- Flecha 3 -->
+                                <div class="flex items-center z-10">
+                                    <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
+                                </div>
+
+                                <!-- 4. PROCESAR & IA -->
+                                <div class="flex flex-col items-center gap-4 z-10">
+                                    <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Transformación & AI</div>
+                                    <div class="flex flex-col gap-3">
+                                        <div class="node-pill has-tooltip">
+                                            <i class="fa-solid fa-fire-flame-curved text-orange-500 text-xl"></i>
+                                            <span>Databricks / Spark</span>
+                                            <div class="tooltip-box">Procesamiento de Big Data e IA colaborativa de alto rendimiento.</div>
+                                        </div>
+                                        <div class="node-pill has-tooltip">
+                                            <i class="fa-solid fa-bolt text-yellow-500 text-xl"></i>
+                                            <span>Synapse Analytics</span>
+                                            <div class="tooltip-box">Análisis ilimitado que une Data Warehouse y Big Data.</div>
+                                        </div>
+                                        <div class="node-pill border-purple-500/50 bg-purple-500/10 has-tooltip">
+                                            <i class="fa-solid fa-brain text-purple-400 text-xl"></i>
+                                            <span class="font-bold">AI Foundry</span>
+                                            <div class="tooltip-box">Plataforma unificada para desarrollar y gestionar modelos de IA generativa.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Flecha 4 -->
+                                <div class="flex items-center z-10">
+                                    <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
+                                </div>
+
+                                <!-- 5. SERVIR -->
+                                <div class="flex flex-col items-center gap-4 z-10">
+                                    <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Inteligencia de Negocio</div>
+                                    <div class="node-box-large bg-yellow-500/5 border-yellow-500/30 has-tooltip">
+                                        <i class="fa-solid fa-chart-pie text-yellow-500 text-6xl mb-4"></i>
+                                        <span class="text-sm font-bold text-white">Power BI</span>
+                                        <span class="text-[10px] text-yellow-300/60 mt-1">Real-time Insights</span>
+                                        <div class="tooltip-box">Analítica visual interactiva para decisiones basadas en datos.</div>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
 
-                        <!-- Flecha 1 -->
-                        <div class="flex items-center z-10">
-                            <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
-                        </div>
-
-                        <!-- 2. INGESTAR (Data Factory Highlighted) -->
-                        <div class="flex flex-col items-center gap-4 z-10">
-                            <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Orquestación</div>
-                            <div class="flex flex-col gap-3">
-                                <div class="node-pill border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.5)] bg-blue-500/20 scale-105 has-tooltip">
-                                    <i class="fa-solid fa-arrows-spin text-blue-400 text-2xl"></i>
-                                    <span class="font-bold">Data Factory</span>
-                                    <div class="tooltip-box">Motor de integración híbrida para mover y transformar datos.</div>
+                            <!-- Flow lines background -->
+                            <div class="flow-path" style="left: 5%; width: 90%; top: 50%; z-index: 0; pointer-events: none;"><div class="flow-line-anim"></div></div>
+                            
+                            <!-- Governo de Datos Lower Bar -->
+                            <div class="absolute bottom-4 inset-x-10 z-20">
+                                <div class="bg-white/5 border border-white/10 rounded-2xl p-3 flex items-center justify-between backdrop-blur-md">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-shield-halved text-blue-400"></i>
+                                        <span class="text-[10px] font-bold text-white tracking-widest uppercase">Gobierno de Datos & Seguridad</span>
+                                    </div>
+                                    <div class="flex gap-10">
+                                        <div class="flex flex-col">
+                                            <span class="text-[8px] text-white/40 uppercase">Metadatos</span>
+                                            <span class="text-[10px] text-blue-200">Data Catalog</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="text-[8px] text-white/40 uppercase">Privacidad</span>
+                                            <span class="text-[10px] text-blue-200">Compliance</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="text-[8px] text-white/40 uppercase">Auditoría</span>
+                                            <span class="text-[10px] text-blue-200">Lineage</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-1">
+                                        <div class="w-1 h-1 bg-blue-500 rounded-full animate-pulse"></div>
+                                        <div class="w-1 h-1 bg-blue-500 rounded-full animate-pulse [animation-delay:0.2s]"></div>
+                                        <div class="w-1 h-1 bg-blue-500 rounded-full animate-pulse [animation-delay:0.4s]"></div>
+                                    </div>
                                 </div>
-                                <div class="node-pill has-tooltip">
-                                    <i class="fa-solid fa-bolt text-yellow-400 text-xl"></i>
-                                    <span>Event Hubs</span>
-                                    <div class="tooltip-box">Plataforma de streaming masivo para millones de eventos.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Flecha 2 -->
-                        <div class="flex items-center z-10">
-                            <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
-                        </div>
-
-                        <!-- 3. ALMACENAR -->
-                        <div class="flex flex-col items-center gap-4 z-10 scale-110">
-                            <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Repositorio Central</div>
-                            <div class="node-box-large bg-blue-500/5 glow-blue border-blue-500/30 has-tooltip">
-                                <i class="fa-solid fa-layer-group text-blue-400 text-6xl mb-4"></i>
-                                <span class="text-sm font-bold text-white">Data Lake</span>
-                                <span class="text-[10px] text-blue-300/60 mt-1">Single Source of Truth</span>
-                                <div class="tooltip-box">Repositorio central escalable basado en estándares abiertos.</div>
-                            </div>
-                        </div>
-
-                        <!-- Flecha 3 -->
-                        <div class="flex items-center z-10">
-                            <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
-                        </div>
-
-                        <!-- 4. PROCESAR & IA -->
-                        <div class="flex flex-col items-center gap-4 z-10">
-                            <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Transformación & AI</div>
-                            <div class="flex flex-col gap-3">
-                                <div class="node-pill has-tooltip">
-                                    <i class="fa-solid fa-fire-flame-curved text-orange-500 text-xl"></i>
-                                    <span>Databricks / Spark</span>
-                                    <div class="tooltip-box">Procesamiento de Big Data e IA colaborativa de alto rendimiento.</div>
-                                </div>
-                                <div class="node-pill has-tooltip">
-                                    <i class="fa-solid fa-bolt text-yellow-500 text-xl"></i>
-                                    <span>Synapse Analytics</span>
-                                    <div class="tooltip-box">Análisis ilimitado que une Data Warehouse y Big Data.</div>
-                                </div>
-                                <div class="node-pill border-purple-500/50 bg-purple-500/10 has-tooltip">
-                                    <i class="fa-solid fa-brain text-purple-400 text-xl"></i>
-                                    <span class="font-bold">AI Foundry</span>
-                                    <div class="tooltip-box">Plataforma unificada para desarrollar y gestionar modelos de IA generativa.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Flecha 4 -->
-                        <div class="flex items-center z-10">
-                            <i class="fa-solid fa-chevron-right text-2xl text-blue-500/30 animate-pulse"></i>
-                        </div>
-
-                        <!-- 5. SERVIR -->
-                        <div class="flex flex-col items-center gap-4 z-10">
-                            <div class="text-[10px] font-bold text-blue-400/70 uppercase tracking-widest mb-2">Inteligencia de Negocio</div>
-                            <div class="node-box-large bg-yellow-500/5 border-yellow-500/30 has-tooltip">
-                                <i class="fa-solid fa-chart-pie text-yellow-500 text-6xl mb-4"></i>
-                                <span class="text-sm font-bold text-white">Power BI</span>
-                                <span class="text-[10px] text-yellow-300/60 mt-1">Real-time Insights</span>
-                                <div class="tooltip-box">Analítica visual interactiva para decisiones basadas en datos.</div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Flow lines background -->
-                    <div class="flow-path" style="left: 5%; width: 90%; top: 50%; z-index: 0; pointer-events: none;"><div class="flow-line-anim"></div></div>
-                    
-                    <!-- Governo de Datos Lower Bar -->
-                    <div class="absolute bottom-4 inset-x-10">
-                        <div class="bg-white/5 border border-white/10 rounded-2xl p-3 flex items-center justify-between backdrop-blur-md">
-                            <div class="flex items-center gap-3">
-                                <i class="fa-solid fa-shield-halved text-blue-400"></i>
-                                <span class="text-[10px] font-bold text-white tracking-widest uppercase">Gobierno de Datos & Seguridad</span>
-                            </div>
-                            <div class="flex gap-10">
-                                <div class="flex flex-col">
-                                    <span class="text-[8px] text-white/40 uppercase">Metadatos</span>
-                                    <span class="text-[10px] text-blue-200">Data Catalog</span>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-[8px] text-white/40 uppercase">Privacidad</span>
-                                    <span class="text-[10px] text-blue-200">Compliance</span>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-[8px] text-white/40 uppercase">Auditoría</span>
-                                    <span class="text-[10px] text-blue-200">Lineage</span>
-                                </div>
-                            </div>
-                            <div class="flex gap-1">
-                                <div class="w-1 h-1 bg-blue-500 rounded-full animate-pulse"></div>
-                                <div class="w-1 h-1 bg-blue-500 rounded-full animate-pulse [animation-delay:0.2s]"></div>
-                                <div class="w-1 h-1 bg-blue-500 rounded-full animate-pulse [animation-delay:0.4s]"></div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Columna Derecha: Panel de Resumen -->
+                    <div class="flex flex-col text-left justify-center pr-4 h-[480px] -ml-20">
+                        <div class="bg-blue-900/40 border border-blue-500/20 rounded-2xl p-6 backdrop-blur-md h-[360px] flex flex-col justify-center">
+                            <div class="text-[14px] font-bold mb-4 text-blue-400 flex items-center gap-2 uppercase tracking-widest"><i class="fa-solid fa-microchip"></i> Modern Data Estate</div>
+                            <ul class="space-y-4 text-[13px] leading-snug text-blue-100">
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-400 mt-0.5"></i>
+                                    <span><strong>Big Data + AI:</strong> Sinergia central entre Databricks y Fabric.</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-400 mt-0.5"></i>
+                                    <span><strong>Inteligencia Visual:</strong> Decisiones interactivas y en tiempo real con Power BI.</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-400 mt-0.5"></i>
+                                    <span><strong>Escalable:</strong> Elasticidad masiva para procesar millones de eventos diarios.</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-400 mt-0.5"></i>
+                                    <span><strong>AI Ready:</strong> Datos de alta calidad para gobernar IA corporativa.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -1080,94 +1144,116 @@
                     </div>
                 </div>
 
-                <!-- Informational Card -->
-                <div class="mb-6 mx-6 p-3 bg-purple-900/20 border-l-4 border-purple-400 rounded-r-xl flex items-center gap-3 text-left">
-                    <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-xl pt-1"></i>
-                    <p class="text-[12px] leading-relaxed text-purple-100 m-0">
-                        <strong>IA Generativa a Escala:</strong> Entorno seguro y gobernado para orquestar agentes, LLMs y servicios cognitivos alineados a los objetivos corporativos.
-                    </p>
-                </div>
+                <div class="grid grid-cols-[1fr_360px] gap-4 items-center relative -ml-4">
+                    <!-- Columna Izquierda: Diagrama Foundry -->
+                    <div class="flex flex-col relative w-full min-w-0 h-[480px] justify-center scale-[0.85] origin-left">
+                        <div class="relative w-full h-[470px] flex justify-center items-center mt-2">
+                            
+                            <!-- Main Foundry Pipeline -->
+                            <div class="foundry-pipeline relative z-10 w-[1000px] flex items-center justify-between gap-6 px-4">
+                                
+                                <!-- 1. HUB CENTRAL -->
+                                <div class="flex flex-col items-center gap-4">
+                                    <div class="foundry-label">Development Hub</div>
+                                    <div class="foundry-node-main has-tooltip scale-90">
+                                        <img src="assets/icons/cognitive-services.svg" class="w-24 h-24 mb-4" onerror="this.outerHTML='<i class=\'fa-solid fa-brain text-purple-500 text-6xl\'></i>'">
+                                        <span class="text-xl font-bold text-white text-center leading-tight">Azure AI<br>Foundry</span>
+                                        <p class="text-[10px] text-purple-300/60 mt-2 text-center leading-tight">Unified Platform for<br>Generative AI Models</p>
+                                        <div class="tooltip-box">Centro unificado para diseñar, probar y escalar agentes e IA generativa de vanguardia.</div>
+                                    </div>
+                                </div>
 
-                <div class="relative w-full h-[470px] flex justify-center items-center mt-2">
-                    
-                    <!-- Main Foundry Pipeline -->
-                    <div class="foundry-pipeline relative z-10 flex items-center justify-between gap-8">
-                        
-                        <!-- 1. HUB CENTRAL -->
-                        <div class="flex flex-col items-center gap-4">
-                            <div class="foundry-label">Development Hub</div>
-                            <div class="foundry-node-main has-tooltip">
-                                <img src="assets/icons/cognitive-services.svg" class="w-32 h-32 mb-6" onerror="this.outerHTML='<i class=\'fa-solid fa-brain text-purple-500 text-7xl\'></i>'">
-                                <span class="text-2xl font-bold text-white text-center">Azure AI<br>Foundry</span>
-                                <p class="text-xs text-purple-300/60 mt-3 text-center">Unified Platform for<br>Generative AI Models</p>
-                                <div class="tooltip-box">Centro unificado para diseñar, probar y escalar agentes e IA generativa de vanguardia.</div>
+                                <!-- Flecha 1 -->
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-chevron-right text-3xl text-purple-500/50 animate-pulse"></i>
+                                </div>
+
+                                <!-- 2. INTELLIGENCE SERVICES -->
+                                <div class="flex flex-col items-center gap-4">
+                                    <div class="foundry-label">Intelligence Services</div>
+                                    <div class="grid grid-cols-2 gap-11">
+                                        <div class="foundry-pill has-tooltip">
+                                            <i class="fa-solid fa-file-contract text-orange-400"></i>
+                                            <span class="text-[10px] font-bold">OCR / Vision</span>
+                                            <div class="tooltip-box">Extracción de datos en documentos y análisis inteligente de imágenes.</div>
+                                        </div>
+                                        <div class="foundry-pill has-tooltip">
+                                            <i class="fa-solid fa-microphone text-pink-400"></i>
+                                            <span class="text-[10px] font-bold">Speech AI</span>
+                                            <div class="tooltip-box">Transcripción de voz a texto y síntesis de voz natural multilingüe.</div>
+                                        </div>
+                                        <div class="foundry-pill has-tooltip">
+                                            <i class="fa-solid fa-language text-blue-400"></i>
+                                            <span class="text-[10px] font-bold">Language AI</span>
+                                            <div class="tooltip-box">Análisis de sentimientos, traducción y procesamiento de lenguaje avanzado.</div>
+                                        </div>
+                                        <div class="foundry-pill has-tooltip">
+                                            <i class="fa-solid fa-robot text-teal-400"></i>
+                                            <span class="text-[10px] font-bold">LLMs / GPT-4</span>
+                                            <div class="tooltip-box">Modelos fundacionales para razonamiento complejo y generación de contenido.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Flecha 2 -->
+                                <div class="flex items-center">
+                                    <i class="fa-solid fa-chevron-right text-3xl text-purple-500/50 animate-pulse"></i>
+                                </div>
+
+                                <!-- 3. UX / CHANNELS -->
+                                <div class="flex flex-col items-center gap-4 text-center">
+                                    <div class="foundry-label">Output & UX</div>
+                                    <div class="flex flex-col gap-4">
+                                        <div class="node-pill has-tooltip">
+                                            <i class="fa-solid fa-comment-dots text-blue-400 text-xl"></i>
+                                            <span class="text-xs">Azure Copilot</span>
+                                            <div class="tooltip-box">Asistentes inteligentes integrados para aumentar la productividad diaria.</div>
+                                        </div>
+                                        <div class="node-pill has-tooltip">
+                                            <i class="fa-brands fa-microsoft text-purple-400 text-xl"></i>
+                                            <span class="text-xs">Microsoft Teams</span>
+                                            <div class="tooltip-box">Canal de colaboración para interactuar con agentes de IA de forma natural.</div>
+                                        </div>
+                                        <div class="node-pill has-tooltip">
+                                            <i class="fa-solid fa-mobile-screen-button text-cyan-400 text-xl"></i>
+                                            <span class="text-xs">Custom Apps</span>
+                                            <div class="tooltip-box">Integración de capacidades de IA en aplicaciones web y móviles propias.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
 
-                        <!-- Flecha 1 -->
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-chevron-right text-4xl text-purple-500/50 animate-pulse"></i>
-                        </div>
+                            <!-- Background Animated Flow Lines -->
+                            <div class="flow-path" style="left: 10%; width: 80%; top: 50%; z-index: 0; pointer-events: none;"><div class="flow-line-anim"></div></div>
 
-                        <!-- 2. INTELLIGENCE SERVICES -->
-                        <div class="flex flex-col items-center gap-4">
-                            <div class="foundry-label">Intelligence Services</div>
-                            <div class="grid grid-cols-2 gap-8">
-                                <div class="foundry-pill has-tooltip">
-                                    <i class="fa-solid fa-file-contract text-orange-400"></i>
-                                    <span class="text-xs font-bold">OCR / Vision</span>
-                                    <div class="tooltip-box">Extracción de datos en documentos y análisis inteligente de imágenes.</div>
-                                </div>
-                                <div class="foundry-pill has-tooltip">
-                                    <i class="fa-solid fa-microphone text-pink-400"></i>
-                                    <span class="text-xs font-bold">Speech AI</span>
-                                    <div class="tooltip-box">Transcripción de voz a texto y síntesis de voz natural multilingüe.</div>
-                                </div>
-                                <div class="foundry-pill has-tooltip">
-                                    <i class="fa-solid fa-language text-blue-400"></i>
-                                    <span class="text-xs font-bold">Language AI</span>
-                                    <div class="tooltip-box">Análisis de sentimientos, traducción y procesamiento de lenguaje avanzado.</div>
-                                </div>
-                                <div class="foundry-pill has-tooltip">
-                                    <i class="fa-solid fa-robot text-teal-400"></i>
-                                    <span class="text-xs font-bold">LLMs / GPT-4</span>
-                                    <div class="tooltip-box">Modelos fundacionales para razonamiento complejo y generación de contenido.</div>
-                                </div>
-                            </div>
                         </div>
-
-                        <!-- Flecha 2 -->
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-chevron-right text-4xl text-purple-500/50 animate-pulse"></i>
-                        </div>
-
-                        <!-- 3. UX / CHANNELS -->
-                        <div class="flex flex-col items-center gap-4 text-center">
-                            <div class="foundry-label">Output & UX</div>
-                            <div class="flex flex-col gap-4">
-                                <div class="node-pill scale-110 has-tooltip">
-                                    <i class="fa-solid fa-comment-dots text-blue-400 text-2xl"></i>
-                                    <span class="text-sm">Azure Copilot</span>
-                                    <div class="tooltip-box">Asistentes inteligentes integrados para aumentar la productividad diaria.</div>
-                                </div>
-                                <div class="node-pill scale-110 has-tooltip">
-                                    <i class="fa-brands fa-microsoft text-purple-400 text-2xl"></i>
-                                    <span class="text-sm">Microsoft Teams</span>
-                                    <div class="tooltip-box">Canal de colaboración para interactuar con agentes de IA de forma natural.</div>
-                                </div>
-                                <div class="node-pill scale-110 has-tooltip">
-                                    <i class="fa-solid fa-mobile-screen-button text-cyan-400 text-2xl"></i>
-                                    <span class="text-sm">Custom Apps</span>
-                                    <div class="tooltip-box">Integración de capacidades de IA en aplicaciones web y móviles propias.</div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
-                    <!-- Background Animated Flow Lines -->
-                    <div class="flow-path" style="left: 10%; width: 80%; top: 50%; z-index: 0; pointer-events: none;"><div class="flow-line-anim"></div></div>
-
+                    <!-- Columna Derecha: Panel de Resumen -->
+                    <div class="flex flex-col text-left justify-center pr-4 h-[480px] -ml-20">
+                        <div class="bg-purple-900/40 border border-purple-500/20 rounded-2xl p-6 backdrop-blur-md h-[360px] flex flex-col justify-center">
+                            <div class="text-[14px] font-bold mb-4 text-purple-400 flex items-center gap-2 uppercase tracking-widest"><i class="fa-solid fa-wand-magic-sparkles"></i> IA Generativa</div>
+                            <ul class="space-y-4 text-[13px] leading-snug text-purple-100">
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-400 mt-0.5"></i>
+                                    <span><strong>Cognitive Services:</strong> APIs listas (Visión, Voz, Lenguaje).</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-400 mt-0.5"></i>
+                                    <span><strong>AI Foundry:</strong> Orquesta, testea y escala modelos (LLMs).</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-400 mt-0.5"></i>
+                                    <span><strong>RAG:</strong> (Retrieval Augmented Generation / Generación Aumentada por Recuperación) Conecta tu base empresarial con GPT de forma segura.</span>
+                                </li>
+                                <li class="flex gap-2">
+                                    <i class="fa-solid fa-check text-blue-400 mt-0.5"></i>
+                                    <span><strong>Gobernabilidad:</strong> Trazabilidad nativa con Azure AI Foundry Observability.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -1210,7 +1296,7 @@
             <!-- CIERRE -->
             <section data-background-gradient="linear-gradient(135deg, #0b1120 0%, #00a4ef 100%)">
                 <div class="flex flex-col items-center">
-                    <h1 class="text-7xl font-black mb-10 tracking-tighter">¿Listos para acelerar?</h1>
+                    <h1 class="text-7xl font-black mb-10 tracking-tighter">¿Listos para comenzar?</h1>
                     
                     <div class="flex gap-10 items-center justify-center mb-8">
                         <!-- Componente QR -->
