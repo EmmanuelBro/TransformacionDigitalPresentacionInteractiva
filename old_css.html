@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecosistema Fabric & Azure AI Foundry - Alestra</title>
+    <!-- Reveal.js Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <!-- Theme - Premium Dark -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/moon.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Devicon -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --ms-blue: #00a4ef;
+            --ms-purple: #605dec;
+            --ms-teal: #00f2ff;
+            --bg-dark: #0b1120;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        .reveal { background-color: var(--bg-dark); }
+        .reveal h1 { color: var(--ms-blue); text-transform: none; font-weight: 800; text-shadow: 0 0 20px rgba(0, 164, 239, 0.4); }
+        .reveal h2 { color: #ffffff; text-transform: none; font-weight: 700; }
+        .reveal section { color: #e2e8f0; }
+        
+        /* Glassmorphism Cards */
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            height: 100%;
+        }
+
+        /* Alestra Logo Custom */
+        .alestra-brand {
+            display: flex;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 400;
+            font-size: 60px;
+            color: white;
+            letter-spacing: -4px;
+        }
+        .alestra-star {
+            color: var(--ms-blue);
+            font-size: 70px;
+            margin-left: 5px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px var(--ms-blue));
+        }
+
+        /* Title Glow Effect */
+        .title-glow {
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        .title-glow::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160%;
+            height: 180%;
+            background: radial-gradient(ellipse, rgba(0, 242, 255, 0.25) 0%, rgba(96, 93, 236, 0.15) 40%, transparent 70%);
+            filter: blur(10px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Architecture Diagram Styles --- */
+        .arch-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1.5fr auto 1fr;
+            gap: 15px;
+            position: relative;
+            padding: 20px;
+            height: 520px;
+            align-items: stretch;
+        }
+
+        .arch-pillar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 2;
+        }
+
+        .arch-node {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            transition: all 0.3s;
+        }
+
+        .arch-node i, .arch-node svg { font-size: 28px; margin-bottom: 8px; }
+        
+        /* Custom Colors for Fabric Icons */
+        .icon-factory { color: #59b4d9; }
+        .icon-onelake { color: #0078d4; }
+        .icon-powerbi { color: #f2c811; }
+
+        .pillar-label {
+            font-size: 18px;
+            font-weight: 800;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid var(--ms-blue);
+            padding-bottom: 8px;
+        }
+
+        .node-main {
+            background: linear-gradient(135deg, rgba(0, 164, 239, 0.15), rgba(96, 93, 236, 0.15));
+            border: 2px solid var(--ms-blue);
+            box-shadow: 0 0 15px rgba(0, 164, 239, 0.2);
+        }
+
+        /* Animated Flow Lines */
+        .flow-path {
+            position: absolute;
+            top: 50%;
+            height: 4px;
+            background: rgba(255,255,255,0.03);
+            z-index: 1;
+        }
+
+        .flow-line-anim {
+            position: absolute;
+            height: 100%;
+            width: 150px;
+            background: linear-gradient(90deg, transparent, var(--ms-teal), transparent);
+            animation: flowRight 2.5s linear infinite;
+        }
+
+        @keyframes flowRight {
+            0% { left: -20%; opacity: 0; }
+            50% { opacity: 1; }
+            100% { left: 120%; opacity: 0; }
+        }
+
+        .accent-blue { color: var(--ms-blue); }
+        .accent-purple { color: var(--ms-purple); }
+        .accent-teal { color: var(--ms-teal); }
+
+        /* Slide 5 Specific Architecture Styles */
+        .foundry-bg {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+        }
+        .foundry-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: #8da4c9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .f-icon-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .f-icon-item {
+            width: 75px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 9px;
+            text-align: center;
+            opacity: 0.9;
+        }
+        .f-icon-item i { font-size: 24px; margin-bottom: 5px; }
+        
+        /* Arrow Path definition for architecture */
+        .arrow-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .arrow-line::before {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.2);
+            z-index: 1;
+        }
+        .arrow-line::after {
+            content: '▶';
+            position: absolute;
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+            z-index: 2;
+        }
+        .arrow-h::before { height: 3px; width: 100%; top: 50%; left: 0; }
+        .arrow-h::after { right: -5px; top: 50%; transform: translateY(-50%); }
+        .arrow-v::before { width: 3px; height: 100%; left: 50%; top: 0; }
+        .arrow-v::after { bottom: -10px; left: 50%; transform: translateX(-50%) rotate(90deg); }
+        .arrow-label {
+            position: absolute;
+            font-size: 10px;
+            color: #ccc;
+            background: var(--bg-dark);
+            padding: 2px 5px;
+            z-index: 3;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        /* Slide 6: Analitica de Datos e IA - Premium Glass Pipeline */
+        .glass-pipeline {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            width: 100%;
+        }
+        .node-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            width: 160px;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .node-pill:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateX(5px);
+        }
+        .node-box-large {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 180px;
+            min-height: 170px;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .node-box-large:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+            transform: translateY(-5px) scale(1.05);
+        }
+        .bg-arrow-anim {
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
+            animation: flowRight 3s infinite linear;
+        }
+        .glow-blue { box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
+
+        /* Slide 5: Microsoft Foundry - High Level Premium */
+        .foundry-pipeline {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2.5rem;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            width: 100%;
+        }
+        .foundry-pill {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+            width: 180px;
+            transition: all 0.3s ease;
+        }
+        .foundry-pill:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(96, 93, 236, 0.5);
+            transform: translateY(-5px);
+        }
+        .foundry-pill i, .foundry-pill img {
+            font-size: 3rem;
+        }
+        .foundry-node-main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border-radius: 3rem;
+            background: linear-gradient(135deg, rgba(96, 93, 236, 0.1), rgba(0, 164, 239, 0.1));
+            border: 2px solid rgba(96, 93, 236, 0.3);
+            width: 320px;
+            min-height: 250px;
+            box-shadow: 0 0 60px rgba(96, 93, 236, 0.3);
+        }
+        .foundry-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-fixed {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 100;
+            opacity: 0.6;
+        }
+
+        /* Tooltip Styles */
+        .has-tooltip {
+            position: relative;
+        }
+        .tooltip-box {
+            visibility: hidden;
+            width: 200px;
+            background: rgba(15, 23, 42, 0.95);
+            color: #fff;
+            text-align: left;
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            border-radius: 12px;
+            padding: 12px;
+            position: absolute;
+            z-index: 9999;
+            bottom: 110%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+            pointer-events: none;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            font-size: 12px;
+            line-height: 1.4;
+            font-weight: normal;
+        }
+        .tooltip-box::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(59, 130, 246, 0.5) transparent transparent transparent;
+        }
+        .has-tooltip:hover .tooltip-box {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Paginator */
+        .paginator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .paginator-dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.2);
+        }
+        .paginator-dot.active {
+            background: #00f2ff;
+            box-shadow: 0 0 12px #00f2ff;
+            transform: scale(1.3);
+        }
+
+        /* --- DIAGRAM UNIFORM FONT SIZING (Based on Slide 6: Azure AI Foundry) --- */
+        /* 1. Stage Headers (Ingest, Serve, Development Hub, etc.) -> matches .foundry-label */
+        .pillar-label, .foundry-label, .glass-pipeline > div > div.text-\[10px\] {
+            font-size: 0.7rem !important; /* ~11px */
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 2px !important;
+            line-height: 1.2 !important;
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+        /* 2. Primary Node Titles (Data Factory, OneLake, PowerBI, Azure AI Foundry) */
+        .arch-node .text-lg, .node-box-large .text-sm, .foundry-node-main .text-2xl {
+            font-size: 1.25rem !important; /* 20px */
+            font-weight: bold !important;
+            line-height: 1.2 !important;
+            color: #ffffff !important;
+        }
+
+        /* 3. Secondary Nodes / Services (Cloud, DB, Streaming, AI Services, Output Apps) -> matches .foundry-pill text */
+        .arch-node span.text-\[12px\], .arch-node .bg-blue-900\/60, .arch-node .bg-blue-800\/60, .arch-node .bg-blue-700\/60,
+        .node-pill span, .node-pill span.font-bold, .foundry-pill span.text-xs, .node-box-large .text-md {
+            font-size: 0.85rem !important; /* ~13.5px */
+            font-weight: 700 !important;
+            color: #ffffff !important;
+        }
+
+        /* 4. Subtext / Descriptions -> matches .foundry-node-main p.text-xs */
+        .arch-node .text-\[11px\], .node-box-large .text-\[10px\], .foundry-node-main p.text-xs {
+            font-size: 0.75rem !important; /* 12px */
+            font-weight: normal !important;
+            opacity: 0.7 !important;
+            line-height: 1.3 !important;
+        }
+        
+        .has-tooltip .tooltip-box {
+            font-size: 0.75rem !important; /* 12px */
+            font-weight: normal !important;
+            line-height: 1.4 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="footer-fixed">
+        <div class="flex items-center gap-3">
+            <img src="assets/Alestra.png" alt="alestra" class="h-6 opacity-80" style="filter: brightness(0) invert(1);">
+            <img src="assets/Microsoft_logo_(2012).svg.png" alt="Microsoft" class="h-4 opacity-80">
+            <img src="assets/Microsoft_Azure_Logo.svg.png" alt="Azure" class="h-4 opacity-80">
+        </div>
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Portada -->
+            <section data-background-gradient="linear-gradient(135deg, #0b1120 0%, #1e293b 100%)">
+                <div class="logo-bar flex items-center justify-center gap-12 mb-12">
+                    <img src="assets/Alestra.png" alt="Alestra" class="h-16" style="filter: brightness(0) invert(1);">
+                    <div class="flex items-center gap-8">
+                        <img src="assets/Microsoft_logo_(2012).svg.png" alt="Microsoft" class="h-12">
+                        <img src="assets/Microsoft_Azure_Logo.svg.png" alt="Azure" class="h-10">
+                    </div>
+                </div>
+                <h3 class="text-2xl opacity-60 uppercase tracking-widest mb-4">Ecosistema Unificado</h3>
+                <h1>Fabric & Azure AI Foundry</h1>
+                <p class="text-xl text-slate-400 italic">"Del dato a la decisión acelerando el valor del negocio con data e IA"</p>
+            </section>
+
+            <!-- Slide 2: Valor del Dato -->
+            <section>
+                <div class="flex items-center justify-center mb-4">
+                    <h2 class="text-4xl m-0 title-glow">Impacto del <span class="accent-teal">Valor del Dato</span></h2>
+                </div>
+

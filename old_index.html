@@ -4,15 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecosistema Fabric & Azure AI Foundry - Alestra</title>
+    <!-- Reveal.js Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <!-- Theme - Premium Dark -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/moon.min.css">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Devicon -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-
         :root {
             --ms-blue: #00a4ef;
             --ms-purple: #605dec;
@@ -454,365 +459,121 @@
             line-height: 1.3 !important;
         }
         
-        /* Custom Styles for Case Studies restored from merge */
-        .slide-num {
-            font-size: 5rem;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.1);
-            line-height: 1;
-        }
-        .industry-tag {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            opacity: 0.8;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .case-brand {
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        .tech-badge {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #cbd5e1;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        .tech-badge img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-
         .has-tooltip .tooltip-box {
             font-size: 0.75rem !important; /* 12px */
             font-weight: normal !important;
             line-height: 1.4 !important;
         }
-    
-/* Side Menu toggler */
-        .menu-toggle {
-            position: fixed;
-            top: 25px;
-            left: 25px;
-            z-index: 1001;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(12px);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-        .menu-toggle:hover {
-            background: rgba(255,255,255,0.1);
-            color: var(--ms-teal);
-        }
-
-        .side-menu {
-            position: fixed;
-            top: 50%;
-            transform: translate(-150%, -50%);
-            opacity: 0;
-            pointer-events: none;
-            left: 20px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            background: rgba(11, 17, 32, 0.8);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(16px);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .side-menu.visible {
-            transform: translate(0, -50%);
-            opacity: 1;
-            pointer-events: all;
-        }
-        .side-menu-item {
-            color: #e2e8f0;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
-            padding: 10px 15px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            border: 1px solid transparent;
-            display: flex;
-            align-items: center;
-        }
-        .side-menu-item:hover, .side-menu-item.active {
-            background: rgba(0, 164, 239, 0.15);
-            border-color: var(--ms-blue);
-            color: white;
-            transform: translateX(5px);
-        }
-        .side-menu-item i {
-            width: 24px;
-            font-size: 16px;
-            color: var(--ms-teal);
-        }
-    
     </style>
 </head>
 <body>
     <div class="footer-fixed">
-        <img src="assets/Alestra.png" alt="Alestra" class="h-8 filter brightness-0 invert opacity-80 object-contain">
-        <div class="h-6 w-px bg-white/20"></div>
-        <img src="assets/Microsoft_logo_(2012).svg.png" alt="Microsoft" class="h-6 opacity-80 object-contain">
-    </div>
-
-    <button class="menu-toggle" onclick="document.querySelector('.side-menu').classList.toggle('visible')">
-        <i class="fa-solid fa-bars"></i>
-    </button>
-
-    <div class="side-menu">
-        <a href="#" onclick="deck.slide(0); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item active" id="menu-0"><i class="fa-solid fa-home"></i> Inicio</a>
-        <a href="#" onclick="deck.slide(1); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-1"><i class="fa-solid fa-star"></i> Casos de Éxito</a>
-        <a href="#" onclick="deck.slide(7); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-2"><i class="fa-solid fa-sitemap"></i> Arquitecturas</a>
-        <a href="#" onclick="deck.slide(11); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-3"><i class="fa-solid fa-handshake"></i> Beneficios Alestra</a>
-        <a href="#" onclick="deck.slide(12); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-4"><i class="fa-solid fa-address-card"></i> Contacto</a>
+        <div class="flex items-center gap-3">
+            <img src="assets/Alestra.png" alt="alestra" class="h-6 opacity-80" style="filter: brightness(0) invert(1);">
+            <img src="assets/Microsoft_logo_(2012).svg.png" alt="Microsoft" class="h-4 opacity-80">
+            <img src="assets/Microsoft_Azure_Logo.svg.png" alt="Azure" class="h-4 opacity-80">
+        </div>
     </div>
 
     <div class="reveal">
         <div class="slides">
 
-            <!-- PORTADA -->
+            <!-- Portada -->
             <section data-background-gradient="linear-gradient(135deg, #0b1120 0%, #1e293b 100%)">
-                <div class="flex flex-col items-center justify-center h-full">
-                    <div class="flex items-center gap-12 mb-16">
-                        <img src="assets/Alestra.png" alt="Alestra" class="h-16 filter brightness-0 invert">
-                        <div class="h-16 w-px bg-white/20"></div>
+                <div class="logo-bar flex items-center justify-center gap-12 mb-12">
+                    <img src="assets/Alestra.png" alt="Alestra" class="h-16" style="filter: brightness(0) invert(1);">
+                    <div class="flex items-center gap-8">
                         <img src="assets/Microsoft_logo_(2012).svg.png" alt="Microsoft" class="h-12">
                         <img src="assets/Microsoft_Azure_Logo.svg.png" alt="Azure" class="h-10">
                     </div>
-                    <h3 class="text-2xl opacity-60 uppercase tracking-[0.3em] mb-4">Ecosistema Unificado</h3>
-                    <h1 class="text-7xl font-black mb-8">Fabric & AI Foundry</h1>
-                    <p class="text-xl text-slate-400 italic font-light">"Datos e Inteligencia Artificial para acelerar tu estrategia digital"</p>
                 </div>
+                <h3 class="text-2xl opacity-60 uppercase tracking-widest mb-4">Ecosistema Unificado</h3>
+                <h1>Fabric & Azure AI Foundry</h1>
+                <p class="text-xl text-slate-400 italic">"Del dato a la decisión acelerando el valor del negocio con data e IA"</p>
             </section>
 
-
-            <!-- CASO 1: HANES BRANDS (CULTURA) -->
+            <!-- Slide 2: Valor del Dato -->
             <section>
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="slide-num">01</div>
-                    <h2 class="text-4xl m-0 title-glow">Cultura <span class="accent-teal">Data-Driven</span></h2>
+                <div class="flex items-center justify-center mb-4">
+                    <h2 class="text-4xl m-0 title-glow">Impacto del <span class="accent-teal">Valor del Dato</span></h2>
                 </div>
-                
-                <div class="grid grid-cols-[1fr_400px] gap-8 h-[500px]">
-                    <div class="flex flex-col gap-6 text-left">
-                        <div class="card border-l-4 border-l-red-500/50 bg-red-500/5">
-                            <span class="industry-tag">Retail & Manufactura</span>
-                            <h4 class="text-lg font-bold text-red-400 mb-2"><i class="fa-solid fa-triangle-exclamation mr-2"></i>El Desafío</h4>
-                            <p class="text-[17px] leading-relaxed text-slate-300">Silos de reportes manuales por país. La dirección tardaba días en consolidar hojas de cálculo para visualizar el inventario global, operando bajo suposiciones.</p>
-                        </div>
-                        <div class="card border-l-4 border-l-blue-500 bg-blue-500/5 fragment fade-up">
-                            <h4 class="text-lg font-bold accent-blue mb-2"><i class="fa-solid fa-check-double mr-2"></i>La Solución</h4>
-                            <p class="text-[17px] leading-relaxed text-slate-300">Visibilidad del <strong>100% en tiempo real</strong>. Decisiones fundamentadas en una sola fuente de verdad global, eliminando la incertidumbre en la cadena de suministro.</p>
-                        </div>
-                    </div>
-                    <div class="card bg-gradient-to-b from-blue-900/40 to-slate-900/80 border-2 border-white/10 flex flex-col justify-center items-center">
-                        <i class="fa-solid fa-shirt text-6xl opacity-20 mb-6"></i>
-                        <h3 class="case-brand mb-10 text-center">HanesBrands Inc.</h3>
-                        <div class="flex flex-col gap-4 w-full px-6">
-                            <div class="tech-badge"><img src="assets/icons/fabric.svg" alt="Fabric"> Microsoft Fabric</div>
-                            <div class="tech-badge"><img src="assets/icons/power-bi.svg" alt="Power BI"> Power BI</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- CASO 2: KPMG (SILOS/SEGURIDAD) -->
-            <section>
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="slide-num">02</div>
-                    <h2 class="text-4xl m-0 title-glow">Seguridad & <span class="accent-purple">Gobernanza</span></h2>
+                <!-- Informational Card -->
+                <div class="mb-6 mx-10 p-3 bg-blue-900/20 border-l-4 border-blue-500 rounded-r-xl flex items-center gap-3 text-left">
+                    <i class="fa-solid fa-circle-info text-blue-400 text-xl pt-1"></i>
+                    <p class="text-[13px] leading-relaxed text-blue-100 m-0">
+                        <strong>Evolución Estratégica:</strong> Transformamos silos de información en flujos de valor continuo, permitiendo que cada decisión clave sea impulsada por evidencia y no por intuición.
+                    </p>
                 </div>
-                
-                <div class="grid grid-cols-[1fr_400px] gap-8 h-[500px]">
-                    <div class="flex flex-col gap-6 text-left">
-                        <div class="card border-l-4 border-l-red-500/50 bg-red-500/5">
-                            <span class="industry-tag">Servicios Financieros</span>
-                            <h4 class="text-lg font-bold text-red-400 mb-2"><i class="fa-solid fa-lock-open mr-2"></i>El Desafío</h4>
-                            <p class="text-[17px] leading-relaxed text-slate-300">Datos sensibles distribuidos en sistemas desconectados. Riesgos de cumplimiento y auditorías extremadamente lentas por falta de centralización.</p>
-                        </div>
-                        <div class="card border-l-4 border-l-purple-500 bg-purple-500/5 fragment fade-up">
-                            <h4 class="text-lg font-bold accent-purple mb-2"><i class="fa-solid fa-shield-check mr-2"></i>La Solución</h4>
-                            <p class="text-[17px] leading-relaxed text-slate-300">Plataforma gobernada unificada. Procesamiento de información de clientes un <strong>80% más rápido</strong> con seguridad de nivel bancario nativa.</p>
-                        </div>
-                    </div>
-                    <div class="card bg-gradient-to-b from-purple-900/40 to-slate-900/80 border-2 border-white/10 flex flex-col justify-center items-center">
-                        <i class="fa-solid fa-building-columns text-6xl opacity-20 mb-6"></i>
-                        <h3 class="case-brand mb-10 text-center">KPMG</h3>
-                        <div class="flex flex-col gap-4 w-full px-6">
-                            <div class="tech-badge"><img src="assets/icons/purview.svg" alt="Purview"> Microsoft Purview</div>
-                            <div class="tech-badge"><img src="assets/icons/fabric.svg" alt="Fabric"> Microsoft Fabric</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- CASO 3: WALMART (IA GENERATIVA) -->
-            <section>
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="slide-num">03</div>
-                    <h2 class="text-4xl m-0 title-glow">Productividad con <span class="accent-teal">IA Generativa</span></h2>
-                </div>
-                
-                <div class="grid grid-cols-[1fr_400px] gap-8 h-[500px]">
-                    <div class="flex flex-col gap-6 text-left">
-                        <div class="card border-l-4 border-l-slate-400/50 bg-slate-400/5">
-                            <span class="industry-tag">Retail Global</span>
-                            <h4 class="text-lg font-bold text-slate-200 mb-2"><i class="fa-solid fa-robot mr-2"></i>El Desafío</h4>
-                            <p class="text-[17px] leading-relaxed text-slate-300">Necesidad de escala para 50,000 empleados sin comprometer datos confidenciales en herramientas de IA públicas.</p>
-                        </div>
-                        <div class="card border-l-4 border-l-teal-500 bg-teal-500/5 fragment fade-up">
-                            <h4 class="text-lg font-bold accent-teal mb-2"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>La Solución</h4>
-                            <p class="text-[17px] leading-relaxed text-slate-300">Despliegue de "My Assistant". 50,000 empleados ahora resumen, redactan y analizan con IA en un entorno 100% privado y seguro.</p>
-                        </div>
-                    </div>
-                    <div class="card bg-gradient-to-b from-teal-900/40 to-slate-900/80 border-2 border-white/10 flex flex-col justify-center items-center">
-                        <i class="fa-solid fa-cart-shopping text-6xl opacity-20 mb-6"></i>
-                        <h3 class="case-brand mb-10 text-center">Walmart</h3>
-                        <div class="flex flex-col gap-4 w-full px-6">
-                            <div class="tech-badge"><img src="assets/icons/azure-openai.svg" alt="OpenAI"> Azure OpenAI</div>
-                            <div class="tech-badge"><img src="assets/icons/ai-foundry.svg" alt="Foundry"> AI Foundry</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CASO 4: MERCEDES (CALIDAD) -->
-            <section>
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="slide-num">04</div>
-                    <h2 class="text-4xl m-0 title-glow">Confianza del <span class="accent-blue">Dato Maestro</span></h2>
-                </div>
-                
-                <div class="grid grid-cols-[1fr_400px] gap-8 h-[500px]">
-                    <div class="flex flex-col gap-6 text-left">
-                        <div class="card border-l-4 border-l-red-500/50 bg-red-500/5">
-                            <span class="industry-tag">Automotriz</span>
-                            <h4 class="text-lg font-bold text-red-400 mb-2"><i class="fa-solid fa-microchip mr-2"></i>El Desafío</h4>
-                            <p class="text-[17px] leading-relaxed text-slate-300">Para predecir fallos en ensamble, los datos deben ser 100% fidedignos. "Basura entra, basura sale" es inaceptable en manufactura de precisión.</p>
-                        </div>
-                        <div class="card border-l-4 border-l-blue-500 bg-blue-500/5 fragment fade-up">
-                            <h4 class="text-lg font-bold accent-blue mb-2"><i class="fa-solid fa-gauge-high mr-2"></i>La Solución</h4>
-                            <p class="text-[17px] leading-relaxed text-slate-300">Data Quality Automatizado. Perfilado de salud en tiempo real antes de llegar a la IA, garantizando precisión milimétrica en la fabricación.</p>
-                        </div>
-                    </div>
-                    <div class="card bg-gradient-to-b from-blue-900/40 to-slate-900/80 border-2 border-white/10 flex flex-col justify-center items-center">
-                        <i class="fa-solid fa-car text-6xl opacity-20 mb-6"></i>
-                        <h3 class="case-brand mb-10 text-center">Mercedes-Benz</h3>
-                        <div class="flex flex-col gap-4 w-full px-6">
-                            <div class="tech-badge"><img src="assets/icons/purview.svg" alt="Purview"> Purview Quality</div>
-                            <div class="tech-badge"><img src="assets/icons/data-governance.svg" alt="Governance"> Gov. Corporativa</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CASO 5: GAY LEA FOODS (PREGUNTA UNIFICADA) -->
-            <section>
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="slide-num">05</div>
-                    <h2 class="text-4xl m-0 title-glow">Visión y <span class="accent-teal">Transformación</span></h2>
-                </div>
-                
-
-
-                <div class="grid grid-cols-[1fr_400px] gap-8 h-[450px]">
-                    <div class="flex flex-col gap-6 text-left">
-                        <div class="card border-l-4 border-l-teal-500/50 bg-teal-500/5">
-                            <span class="industry-tag">Consumo Masiivo</span>
-                            <h4 class="text-lg font-bold text-teal-400 mb-2"><i class="fa-solid fa-code-branch mr-2"></i>El Desafío</h4>
-                            <p class="text-[16px] leading-relaxed text-slate-300">Modernizar rápidamente infraestructuras legadas para definir una estrategia de datos clara a lo largo de toda su cadena de suministro.</p>
-                        </div>
-                        <div class="card border-l-4 border-l-blue-500 bg-blue-500/5 fragment fade-up">
-                            <h4 class="text-lg font-bold accent-blue mb-2"><i class="fa-solid fa-bullseye mr-2"></i>La Solución</h4>
-                            <p class="text-[16px] leading-relaxed text-slate-300">Implementación de <strong>Microsoft Fabric y Azure AI Foundry</strong> para unificar silos de información dispersos, habilitando a la organización a extraer conocimiento estructurado de su cadena de suministro.</p>
-                        </div>
-                    </div>
-                    <div class="card bg-gradient-to-b from-blue-900/40 to-slate-900/80 border-2 border-white/10 flex flex-col justify-center items-center">
-                        <i class="fa-solid fa-cow text-6xl opacity-20 mb-6"></i>
-                        <h3 class="case-brand mb-10 text-center">Gay Lea Foods</h3>
-                        <div class="flex flex-col gap-4 w-full px-6">
-                            <div class="tech-badge"><img src="assets/icons/fabric.svg" alt="Fabric"> Microsoft Fabric</div>
-                            <div class="tech-badge"><img src="assets/icons/ai-foundry.svg" alt="AI Foundry"> Azure AI Foundry</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- VALOR DEL DATO CHART -->
-            <section>
-                <h2 class="text-5xl mb-12 title-glow">Impacto del <span class="accent-teal">Valor del Dato</span></h2>
-                <div class="grid grid-cols-2 gap-12 items-center h-[500px]">
-                    <div class="card flex flex-col items-center justify-center py-8">
-                        <h4 class="text-xl font-bold mb-6">Decisiones Basadas en Evidencia</h4>
-                        <div style="height: 300px; width: 100%;">
+                <div class="grid grid-cols-2 gap-10 items-center">
+                    <div class="card h-[450px] flex flex-col justify-center items-center">
+                        <h4 class="text-sm uppercase font-bold accent-blue mb-4 text-center">Eficacia en Decisiones Estratégicas</h4>
+                        <div style="height: 280px; width: 100%;">
                             <canvas id="dataChart"></canvas>
                         </div>
-                        <p class="text-xs mt-6 opacity-40 uppercase tracking-widest">Fuente: Gartner Research 2024</p>
+                        <p class="text-[10px] mt-4 opacity-40">Fuente: Gartner Research 2024</p>
                     </div>
-                    <div class="flex flex-col gap-4">
-                        <div class="card border-l-8 border-l-teal-400 flex items-center justify-between p-6">
-                            <div class="text-left">
-                                <p class="text-xs uppercase font-black opacity-40 mb-1">Rentabilidad</p>
-                                <h3 class="text-5xl font-black accent-teal">23%</h3>
-                            </div>
-                            <span class="text-[10px] px-3 py-1 border border-teal-400/30 rounded-full font-bold">IDC</span>
+                    <div class="flex flex-col gap-4 text-left">
+                        <div class="card border-l-8 border-l-[#00f2ff] fragment fade-left">
+                            <div class="flex justify-between font-black text-4xl accent-teal mb-1">23% <span class="text-[10px] px-2 py-1 bg-[#00f2ff]/20 rounded-full font-bold text-[#00f2ff] border border-[#00f2ff]/30 h-fit">FUENTE: IDC</span></div>
+                            <p class="text-[12px] uppercase font-bold tracking-widest">Rentabilidad Directa</p>
+                            <p class="text-[11px] opacity-60 border-t border-white/10 mt-2 pt-2">Caso: Walmart optimizó inventario en tiempo real.</p>
                         </div>
-                        <div class="card border-l-8 border-l-purple-500 flex items-center justify-between p-6">
-                            <div class="text-left">
-                                <p class="text-xs uppercase font-black opacity-40 mb-1">Agilidad Operativa</p>
-                                <h3 class="text-5xl font-black accent-purple">5.2x</h3>
-                            </div>
-                            <span class="text-[10px] px-3 py-1 border border-purple-500/30 rounded-full font-bold">FORRESTER</span>
+                        <div class="card border-l-8 border-l-[#605dec] fragment fade-left">
+                            <div class="flex justify-between font-black text-4xl accent-purple mb-1">5.2x <span class="text-[10px] px-2 py-1 bg-[#605dec]/20 rounded-full font-bold text-[#b4b0ff] border border-[#605dec]/30 h-fit">FUENTE: FORRESTER</span></div>
+                            <p class="text-[12px] uppercase font-bold tracking-widest">Velocidad de Respuesta</p>
+                            <p class="text-[11px] opacity-60 border-t border-white/10 mt-2 pt-2">Caso: Maersk aceleró decisiones de días a horas.</p>
                         </div>
-                        <div class="card border-l-8 border-l-blue-500 flex items-center justify-between p-6">
-                            <div class="text-left">
-                                <p class="text-xs uppercase font-black opacity-40 mb-1">Precisión Operativa</p>
-                                <h3 class="text-5xl font-black accent-blue">84%</h3>
-                            </div>
-                            <span class="text-[10px] px-3 py-1 border border-blue-500/30 rounded-full font-bold">GARTNER</span>
+                        <div class="card border-l-8 border-l-[#00a4ef] fragment fade-left">
+                            <div class="flex justify-between font-black text-4xl accent-blue mb-1">84% <span class="text-[10px] px-2 py-1 bg-[#00a4ef]/20 rounded-full font-bold text-[#80d8ff] border border-[#00a4ef]/30 h-fit">FUENTE: GARTNER</span></div>
+                            <p class="text-[12px] uppercase font-bold tracking-widest">Precisión Operativa</p>
+                            <p class="text-[11px] opacity-60 border-t border-white/10 mt-2 pt-2">Caso: PepsiCo y BMW eliminaron errores manuales.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-                        <!-- Slide 4: Arquitectura End-to-End -->
+            <!-- Slide 3: Valor de la IA -->
+            <section>
+                <h2 class="mb-6 title-glow">Valor Estratégico de la <span class="accent-teal">IA Foundry</span></h2>
+                
+                <!-- Informational Card -->
+                <div class="card border-l-4 border-l-teal-500 bg-teal-500/5 py-4 px-6 mb-8 flex items-start gap-4">
+                    <i class="fa-solid fa-lightbulb text-teal-400 mt-1"></i>
+                    <p class="text-sm text-left italic opacity-90 leading-relaxed">
+                        "Azure AI Foundry unifica la creación, seguridad y escalabilidad de modelos de IA Generativa. Reducimos la complejidad técnica para que su organización pueda enfocarse en la innovación y el impacto de negocio inmediato."
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 items-center">
+                    <div class="flex flex-col gap-3 text-left">
+                        <div class="card border-l-4 border-l-[#00f2ff] fragment fade-right">
+                            <div class="text-[12px] font-bold uppercase text-blue-400 mb-1">Bot Service / NLP</div>
+                            <div class="text-3xl font-black accent-teal">+40% Productividad</div>
+                            <p class="text-[11px] opacity-60">Implementación de GPT-4 para escala masiva (Caso Klarna).</p>
+                        </div>
+                        <div class="card border-l-4 border-l-[#605dec] fragment fade-right">
+                            <div class="text-[12px] font-bold uppercase text-purple-400 mb-1">Agents / Machine Learning</div>
+                            <div class="text-3xl font-black accent-purple">+30% Eficiencia Costos</div>
+                            <p class="text-[11px] opacity-60">Modelos predictivos para manufactura (Caso BMW).</p>
+                        </div>
+                        <div class="card border-l-4 border-l-[#00a4ef] fragment fade-right">
+                            <div class="text-[12px] font-bold uppercase text-sky-400 mb-1">OCR / Document Intelligence</div>
+                            <div class="text-3xl font-black accent-blue">84% Precisión Procesos</div>
+                            <p class="text-[11px] opacity-60">Automatización de supply chain y facturación global.</p>
+                        </div>
+                    </div>
+                    <div class="card h-[450px] flex flex-col justify-center">
+                        <h4 class="text-sm uppercase font-bold accent-purple mb-4 text-center">ROI por Servicio de IA Foundry</h4>
+                        <div style="height: 280px; width: 100%;">
+                            <canvas id="aiChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Arquitectura End-to-End -->
             <section>
                 <h2 class="mb-4 title-glow">Arquitectura <span class="accent-purple">Analytics</span></h2>
                 
@@ -1171,153 +932,177 @@
                 </div>
             </section>
 
-
-
-            <!-- VALOR ESTRATEGICO IA -->
+            <!-- Slide 7: Escenario -->
             <section>
-                <h2 class="text-5xl mb-12 title-glow">Valor Estratégico <span class="accent-teal">AI Foundry</span></h2>
-                <div class="grid grid-cols-2 gap-12 items-center">
-                    <div class="flex flex-col gap-6 text-left">
-                        <div class="card border-l-4 border-l-teal-400 bg-teal-400/5">
-                            <div class="text-3xl font-black accent-teal mb-2">+40% Eficiencia</div>
-                            <p class="text-sm opacity-70">Implementación de asistentes corporativos para automatización de flujos de trabajo.</p>
+                <div class="flex items-center justify-center mb-8">
+                    <h2 class="text-4xl m-0 title-glow">Valor <span class="accent-blue">Real Data + IA</span></h2>
+                </div>
+                <div class="grid grid-cols-2 gap-8 items-center h-[500px]">
+                    <!-- Left Column: Chat -->
+                    <div class="p-8 card border-2 border-dashed border-slate-700 relative shadow-2xl h-full flex flex-col justify-center">
+                        <div class="text-left mb-10">
+                            <p class="text-[10px] accent-teal font-mono tracking-widest uppercase mb-2">Usuario de Negocio (Natural Language)</p>
+                            <p class="text-2xl font-light italic text-white line-clamp-4">"¿Cuál fue el margen de utilidad por región el último trimestre y qué factores lo afectaron?"</p>
                         </div>
-                        <div class="card border-l-4 border-l-purple-500 bg-purple-500/5">
-                            <div class="text-3xl font-black accent-purple">+30% ROI Operativo</div>
-                            <p class="text-sm opacity-70">Modelos de IA aplicados a la reducción de costos en logística y manufactura.</p>
+                        <div class="text-right fragment" data-fragment-index="1">
+                            <p class="text-[10px] accent-purple font-mono tracking-widest uppercase mb-2">Agent Service + Fabric</p>
+                            <div class="p-4 bg-slate-900/80 rounded-2xl inline-block text-left border border-slate-700">
+                                <p class="text-sm">"El margen consolidado fue del <strong class="text-white">18%</strong>. El factor principal fue el costo logístico en el Norte. He generado un reporte detallado en Power BI."</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="card py-8">
-                        <h4 class="text-xl font-bold mb-8">Uso de Servicios de IA Generativa</h4>
-                        <div style="height: 300px; width: 100%;">
-                            <canvas id="aiChart"></canvas>
+
+                    <!-- Right Column: Generated Chart -->
+                    <div class="p-6 card border border-slate-700 bg-slate-900/40 relative shadow-2xl h-full flex flex-col fragment fade-up" data-fragment-index="2">
+                        <div class="flex items-center gap-3 border-b border-white/10 pb-3 mb-4">
+                            <i class="fa-solid fa-chart-simple text-purple-400"></i>
+                            <span class="text-xs font-bold text-white uppercase tracking-widest">Reporte Generado</span>
+                        </div>
+                        <div class="w-full flex-grow relative" style="min-height: 300px;">
+                            <canvas id="promptChart"></canvas>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- DIFERENCIADORES -->
-            <section>
-                <h2 class="text-5xl mb-8 title-glow">Socio Estratégico: <span class="accent-blue">Alestra</span> + <span class="accent-teal">Microsoft</span></h2>
-                <div class="grid grid-cols-2 gap-8 h-[480px] items-center">
+            <!-- Slide 7: Socio Estratégico -->
+            <section data-background-color="#0b1120">
+                <div class="flex items-center justify-between mb-12">
+                    <h2 class="text-4xl font-bold text-white m-0 title-glow">Socio Estratégico: <span class="accent-blue">Alestra</span> + <span class="text-blue-400">Microsoft</span></h2>
+                </div>
+
+                <div class="grid grid-cols-2 gap-10 items-center">
                     <div class="flex flex-col gap-6">
                         <div class="card border-l-4 border-l-blue-500 bg-blue-500/5 p-6 flex items-start gap-4">
-                            <i class="fa-solid fa-users-gear text-4xl accent-blue mt-1"></i>
+                            <i class="fa-solid fa-handshake-angle text-blue-400 text-3xl"></i>
                             <div class="text-left">
-                                <h4 class="text-xl font-bold mb-2">Especialistas Certificados</h4>
-                                <p class="text-[15px] text-slate-300 leading-snug">Infraestructura y talento especializado para orquestar modelos de IA y arquitecturas de datos modernas.</p>
+                                <h4 class="text-lg font-bold text-white mb-2">Capacidad de Implementación</h4>
+                                <p class="text-sm opacity-80 leading-relaxed">
+                                    En Alestra contamos con los especialistas certificados y la infraestructura necesaria para materializar estas arquitecturas, desde la migración de datos hasta la orquestación de modelos de IA.
+                                </p>
                             </div>
                         </div>
-                        <div class="card border-l-4 border-l-teal-500 bg-teal-500/5 p-6 flex items-start gap-4">
-                            <i class="fa-solid fa-shield-virus text-4xl accent-teal mt-1"></i>
+                        <div class="card border-l-4 border-l-purple-500 bg-purple-500/5 p-6 flex items-start gap-4">
+                            <i class="fa-solid fa-shield-check text-purple-400 text-3xl"></i>
                             <div class="text-left">
-                                <h4 class="text-xl font-bold mb-2">Garantía de Seguridad</h4>
-                                <p class="text-[15px] text-slate-300 leading-snug">Ciberseguridad y cumplimiento normativo integrados en cada capa de su ecosistema de datos.</p>
+                                <h4 class="text-lg font-bold text-white mb-2">Garantía de Seguridad</h4>
+                                <p class="text-sm opacity-80 leading-relaxed">
+                                    Aseguramos que su viaje a la IA sea seguro, gobernado y alineado con las mejores prácticas de ciberseguridad y cumplimiento normativo.
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="card bg-gradient-to-br from-blue-600/10 to-transparent flex flex-col justify-center p-10 relative overflow-hidden h-[95%]">
-                        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-500/10 blur-3xl rounded-full"></div>
-                        <h3 class="text-3xl font-black mb-8 tracking-tight">Nuestros Diferenciadores</h3>
-                        <ul class="text-left space-y-5">
-                            <li class="flex items-center gap-4 text-[17px] font-medium"><i class="fa-solid fa-circle-check accent-teal"></i> Centro de Excelencia en IA</li>
-                            <li class="flex items-center gap-4 text-[17px] font-medium"><i class="fa-solid fa-circle-check accent-teal"></i> Gestión 24/7 Nivel Enterprise</li>
-                            <li class="flex items-center gap-4 text-[17px] font-medium"><i class="fa-solid fa-circle-check accent-teal"></i> Conexión Directa Multicloud</li>
-                            <li class="flex items-center gap-4 text-[17px] font-medium"><i class="fa-solid fa-circle-check accent-teal"></i> Consultoría End-to-End</li>
-                        </ul>
+
+                    <div class="relative">
+                        <div class="card p-8 bg-gradient-to-br from-blue-600/10 to-purple-600/10 border border-white/10">
+                            <div class="text-4xl font-black mb-6 tracking-tighter text-center">Nuestros <span class="accent-teal">Diferenciadores</span></div>
+                            <ul class="text-left space-y-4">
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check-circle text-teal-400"></i>
+                                    <span class="text-sm font-semibold text-white">Centro de Excelencia en Nube e IA</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check-circle text-teal-400"></i>
+                                    <span class="text-sm font-semibold text-white">Soporte y Gestión 24/7 de Nivel Empresarial</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check-circle text-teal-400"></i>
+                                    <span class="text-sm font-semibold text-white">Conexiones Dedicadas a Múltiples Fuentes de Datos</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check-circle text-teal-400"></i>
+                                    <span class="text-sm font-semibold text-white">Enfoque Consultivo "End-to-End"</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Decorative Glow -->
+                        <div class="absolute -inset-4 bg-blue-500/20 blur-3xl -z-10 rounded-full"></div>
                     </div>
                 </div>
             </section>
 
-            <!-- CIERRE -->
-            <section data-background-gradient="linear-gradient(135deg, #0b1120 0%, #00a4ef 100%)">
-                <div class="flex flex-col items-center">
-                    <h1 class="text-7xl font-black mb-10 tracking-tighter">¿Listos para acelerar?</h1>
-                    
-                    <div class="flex gap-10 items-center justify-center mb-8">
-                        <!-- Componente QR -->
-                        <div class="bg-white p-5 rounded-3xl shadow-2xl flex flex-col items-center">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fforms.cloud.microsoft%2FPages%2FResponsePage.aspx%3Fid%3DYEET83Nao0-ADywnRlP64drGQReMBJ9DqNuDRvqmRQhURFMxUDhPNFJEUlA0NjdZU1NPTzJNSVlCSC4u" alt="QR Code Evaluación" class="w-[180px] h-[180px]" />
-                            <p class="text-black text-sm font-black mt-3 mb-0 uppercase tracking-widest">Contáctenos</p>
-                        </div>
-                        
-                        <!-- Bloques Adicionales -->
-                        <div class="flex flex-col gap-6">
-                            <div class="flex gap-4">
-                                <div class="text-center bg-black/20 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/10"><h2 class="text-5xl font-black mb-1">01</h2><p class="text-[11px] uppercase font-bold tracking-widest m-0">Unifica</p></div>
-                                <div class="text-center bg-black/20 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/10"><h2 class="text-5xl font-black mb-1">02</h2><p class="text-[11px] uppercase font-bold tracking-widest m-0">Potencia</p></div>
-                                <div class="text-center bg-black/20 backdrop-blur-md px-6 py-4 rounded-2xl border border-white/10"><h2 class="text-5xl font-black mb-1">03</h2><p class="text-[11px] uppercase font-bold tracking-widest m-0">Lidera</p></div>
-                            </div>
-                            <div class="bg-black/20 backdrop-blur-md p-6 rounded-2xl border border-white/10 max-w-lg text-left">
-                                <p class="text-lg mb-2 font-light italic text-slate-300">Si buscas modernizar tu estrategia de datos, contacta a tu ejecutivo Alestra o mandanos un correo a:</p>
-                                <div class="text-3xl font-bold text-white m-0 tracking-wide lowercase" style="color: white !important; text-transform: lowercase !important;">ebriseno@axtel.com.mx</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center gap-10 mt-4 opacity-80">
-                        <img src="assets/Alestra.png" alt="Alestra" class="h-12 filter brightness-0 invert">
-                        <div class="h-12 w-px bg-white/20"></div>
-                        <img src="assets/Microsoft_logo_(2012).svg.png" alt="Microsoft" class="h-9">
-                        <img src="assets/Microsoft_Azure_Logo.svg.png" alt="Azure" class="h-8">
-                    </div>
+            <!-- Slide 8: Cierre -->
+            <section data-background-gradient="linear-gradient(135deg, #0b1120 0%, #4f46e5 100%)">
+                <h1 class="text-7xl font-black mb-10 tracking-tighter">¿Listos para acelerar?</h1>
+                <div class="grid grid-cols-3 gap-6 text-center mb-10">
+                    <div><h2 class="accent-teal mb-2">01</h2><p class="text-sm font-bold uppercase">Unifica en Fabric</p></div>
+                    <div><h2 class="accent-teal mb-2">02</h2><p class="text-sm font-bold uppercase">Potencia con Foundry</p></div>
+                    <div><h2 class="accent-teal mb-2">03</h2><p class="text-sm font-bold uppercase">Lidera el Futuro</p></div>
                 </div>
+                <div class="text-xl opacity-90 mb-6 bg-black/20 p-4 rounded-lg border border-white/10 inline-block">
+                    Si estos servicios forman parte de su interés, por favor contacte a su <strong class="text-[#00f2ff]">ejecutivo de cuenta</strong><br>
+                    o mande correo a <a href="mailto:ebriseno@axtel.com.mx" class="text-blue-400 font-bold hover:underline">ebriseno@axtel.com.mx</a>.
+                </div>
+                <p class="text-xl opacity-60 italic">Gracias por su atención. <br><strong>Alestra + Microsoft Azure</strong></p>
             </section>
 
         </div>
     </div>
 
-    <!-- CUSTOM PAGINATOR INTEGRATED -->
-    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[150] flex gap-3 bg-white/5 backdrop-blur-xl p-3 px-6 rounded-full border border-white/10" id="paginator-controls">
-        <!-- Rendered by JS -->
+    <!-- Paginador Custom -->
+    <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 flex gap-3 bg-slate-900/60 p-3 px-6 rounded-full backdrop-blur-md border border-white/10" id="custom-paginator">
+        <button class="paginator-dot active" onclick="deck.slide(0)" title="Portada"></button>
+        <button class="paginator-dot" onclick="deck.slide(1)" title="Valor del Dato"></button>
+        <button class="paginator-dot" onclick="deck.slide(2)" title="Valor de la IA"></button>
+        <button class="paginator-dot" onclick="deck.slide(3)" title="Arquitectura Analytics"></button>
+        <button class="paginator-dot" onclick="deck.slide(4)" title="Analítica de Datos e IA"></button>
+        <button class="paginator-dot" onclick="deck.slide(5)" title="Azure AI Foundry"></button>
+        <button class="paginator-dot" onclick="deck.slide(6)" title="Valor Real"></button>
+        <button class="paginator-dot" onclick="deck.slide(7)" title="Diferenciadores"></button>
+        <button class="paginator-dot" onclick="deck.slide(8)" title="Cierre"></button>
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
     <script>
+        // Hacer deck global para el paginador
         let deck;
+        
         let dataChart = null;
         let aiChart = null;
+        let promptChart = null;
 
         document.addEventListener('DOMContentLoaded', () => {
             deck = new Reveal({
-                hash: true,
+                hash: false, 
                 center: true,
                 transition: 'convex',
-                width: 1200,
-                height: 800,
+                width: 1100,
+                height: 850,
+                margin: 0.1,
                 controls: true,
                 progress: true,
-                margin: 0.1
+                slideNumber: false
             });
             deck.initialize();
 
-            // Paginator Logic
-            const paginator = document.getElementById('paginator-controls');
-            const totalSlides = document.querySelectorAll('.reveal .slides > section').length;
-            for(let i=0; i<totalSlides; i++) {
-                const dot = document.createElement('button');
-                dot.className = `paginator-dot ${i === 0 ? 'active' : ''}`;
-                dot.onclick = () => deck.slide(i);
-                paginator.appendChild(dot);
-            }
-
             deck.on('slidechanged', event => {
-                const index = event.indexh;
-                if (index === 6) initDataChart();
-                if (index === 10) initAIChart();
+                if (event.indexh === 1) initDataChart();
+                if (event.indexh === 2) initAIChart();
                 
-                document.querySelectorAll('.paginator-dot').forEach((dot, idx) => {
-                    dot.classList.toggle('active', idx === index);
+                // Actualizar Paginador Custom
+                document.querySelectorAll('.paginator-dot').forEach((dot, index) => {
+                    if (index === event.indexh) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
                 });
-
-                // Update Side Menu Active State
-                document.querySelectorAll('.side-menu-item').forEach(item => item.classList.remove('active'));
-                if (index === 0) document.getElementById('menu-0').classList.add('active');
-                else if (index >= 1 && index <= 6) document.getElementById('menu-1').classList.add('active'); // Casos y charts
-                else if (index >= 7 && index <= 9) document.getElementById('menu-2').classList.add('active'); // Arquitecturas
-                else if (index >= 10 && index <= 11) document.getElementById('menu-3').classList.add('active'); // IA & Diferenciadores
-                else if (index >= 12) document.getElementById('menu-4').classList.add('active'); // Contacto
             });
+
+            // Usar IntersectionObserver para renderizar la gráfica solo cuando el slide/fragmento sea visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        initPromptChart();
+                        observer.unobserve(entry.target); // Solo animar la primera vez
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const chartCanvas = document.getElementById('promptChart');
+            if(chartCanvas) observer.observe(chartCanvas);
+            
         });
 
         function initDataChart() {
@@ -1326,17 +1111,21 @@
             dataChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Decisiones con Datos', 'Intuición'],
+                    labels: ['Decisiones con Datos', 'Intuición / Manual'],
                     datasets: [{
                         data: [78, 22],
                         backgroundColor: ['#00f2ff', 'rgba(255, 255, 255, 0.05)'],
-                        borderColor: '#0b1120',
-                        borderWidth: 8
+                        borderColor: ['#0b1120', '#0b1120'],
+                        borderWidth: 4
                     }]
                 },
                 options: {
-                    cutout: '80%', responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom', labels: { color: '#fff', padding: 20, font: { size: 14 } } } },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: true, position: 'bottom', labels: { color: '#fff', font: { size: 16 } } }
+                    },
+                    cutout: '80%',
                     animation: { duration: 2000, easing: 'easeOutQuart' }
                 }
             });
@@ -1348,23 +1137,67 @@
             aiChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['NLP', 'ML Predictive', 'Vision AI', 'Copilots'],
+                    labels: ['Bot Service (NLP)', 'Predictive ML', 'OCR / Vision', 'Foundry Agents'],
                     datasets: [{
-                        label: '% Adopción',
-                        data: [85, 62, 45, 92],
-                        backgroundColor: ['#00a4ef', '#00f2ff', '#605dec', '#4f46e5'],
-                        borderRadius: 12,
-                        barThickness: 40
+                        data: [45, 38, 32, 50],
+                        backgroundColor: ['#00a4ef', '#605dec', '#00f2ff', '#4f46e5'],
+                        borderRadius: 12
                     }]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
-                    scales: { 
-                        y: { display: false, beginAtZero: true },
-                        x: { ticks: { color: '#fff', font: { size: 12, weight: 'bold' } }, grid: { display: false } }
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { display: false },
+                        y: { ticks: { color: '#fff', font: { size: 14, weight: 'bold' } }, grid: { display: false } }
                     },
                     plugins: { legend: { display: false } },
                     animation: { duration: 2500 }
+                }
+            });
+        }
+
+        function initPromptChart() {
+            const ctx = document.getElementById('promptChart').getContext('2d');
+            if (promptChart) promptChart.destroy();
+            promptChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Sur', 'Centro', 'Occidente', 'Norte'],
+                    datasets: [
+                        {
+                            label: 'Margen (%)',
+                            data: [22, 19, 24, 12],
+                            backgroundColor: ['#10b981', '#10b981', '#10b981', '#ef4444'], // Red for the problem region
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)' }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            max: 30,
+                            ticks: { color: '#8da4c9', font: { size: 12 } },
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            title: { display: true, text: 'Margen de Utilidad (%)', color: '#fff', font: {size: 10} }
+                        },
+                        x: { 
+                            ticks: { color: '#fff', font: { size: 12, weight: 'bold' } },
+                            grid: { display: false }
+                        }
+                    },
+                    animation: {
+                        duration: 3500,
+                        easing: 'easeOutQuart'
+                    }
                 }
             });
         }

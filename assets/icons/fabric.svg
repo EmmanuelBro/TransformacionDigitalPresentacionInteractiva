@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+    <defs>
+        <linearGradient id="fab1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0063B1"/>
+            <stop offset="100%" stop-color="#00A4EF"/>
+        </linearGradient>
+        <linearGradient id="fab2" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00F2FF"/>
+            <stop offset="100%" stop-color="#00A4EF"/>
+        </linearGradient>
+        <linearGradient id="fab3" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stop-color="#00A4EF"/>
+            <stop offset="100%" stop-color="#0078D4"/>
+        </linearGradient>
+    </defs>
+    <!-- Background / Shadow block -->
+    <polygon points="48,20 88,40 48,60 8,40" fill="url(#fab1)" opacity="0.3"/>
+    
+    <!-- Left connecting face -->
+    <polygon points="8,40 48,60 48,86 8,66" fill="url(#fab1)" opacity="0.9"/>
+    
+    <!-- Right connecting face -->
+    <polygon points="48,60 88,40 88,66 48,86" fill="url(#fab3)" opacity="0.9"/>
+    
+    <!-- Top diamond -->
+    <polygon points="48,30 88,50 48,70 8,50" fill="url(#fab2)" />
+
+    <!-- Additional top layer to simulate overlapping 'fabric' -->
+    <polygon points="48,15 78,30 48,45 18,30" fill="#ffffff" opacity="0.2"/>
+</svg>
