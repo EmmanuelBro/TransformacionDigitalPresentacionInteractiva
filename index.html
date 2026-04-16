@@ -600,8 +600,8 @@
         <a href="#" onclick="deck.slide(0); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item active" id="menu-0"><i class="fa-solid fa-home"></i> Inicio</a>
         <a href="#" onclick="deck.slide(1); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-1"><i class="fa-solid fa-star"></i> Casos de Éxito</a>
         <a href="#" onclick="deck.slide(7); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-2"><i class="fa-solid fa-sitemap"></i> Arquitecturas</a>
-        <a href="#" onclick="deck.slide(11); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-3"><i class="fa-solid fa-handshake"></i> Beneficios Alestra</a>
-        <a href="#" onclick="deck.slide(12); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-4"><i class="fa-solid fa-address-card"></i> Contacto</a>
+        <a href="#" onclick="deck.slide(10); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-3"><i class="fa-solid fa-handshake"></i> Beneficios Alestra</a>
+        <a href="#" onclick="deck.slide(11); document.querySelector('.side-menu').classList.remove('visible'); return false;" class="side-menu-item" id="menu-4"><i class="fa-solid fa-address-card"></i> Contacto</a>
     </div>
 
     <div class="reveal">
@@ -1173,28 +1173,6 @@
 
 
 
-            <!-- VALOR ESTRATEGICO IA -->
-            <section>
-                <h2 class="text-5xl mb-12 title-glow">Valor Estratégico <span class="accent-teal">AI Foundry</span></h2>
-                <div class="grid grid-cols-2 gap-12 items-center">
-                    <div class="flex flex-col gap-6 text-left">
-                        <div class="card border-l-4 border-l-teal-400 bg-teal-400/5">
-                            <div class="text-3xl font-black accent-teal mb-2">+40% Eficiencia</div>
-                            <p class="text-sm opacity-70">Implementación de asistentes corporativos para automatización de flujos de trabajo.</p>
-                        </div>
-                        <div class="card border-l-4 border-l-purple-500 bg-purple-500/5">
-                            <div class="text-3xl font-black accent-purple">+30% ROI Operativo</div>
-                            <p class="text-sm opacity-70">Modelos de IA aplicados a la reducción de costos en logística y manufactura.</p>
-                        </div>
-                    </div>
-                    <div class="card py-8">
-                        <h4 class="text-xl font-bold mb-8">Uso de Servicios de IA Generativa</h4>
-                        <div style="height: 300px; width: 100%;">
-                            <canvas id="aiChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             <!-- DIFERENCIADORES -->
             <section>
@@ -1308,7 +1286,6 @@
             deck.on('slidechanged', event => {
                 const index = event.indexh;
                 if (index === 6) initDataChart();
-                if (index === 10) initAIChart();
                 
                 document.querySelectorAll('.paginator-dot').forEach((dot, idx) => {
                     dot.classList.toggle('active', idx === index);
@@ -1319,8 +1296,8 @@
                 if (index === 0) document.getElementById('menu-0').classList.add('active');
                 else if (index >= 1 && index <= 6) document.getElementById('menu-1').classList.add('active'); // Casos y charts
                 else if (index >= 7 && index <= 9) document.getElementById('menu-2').classList.add('active'); // Arquitecturas
-                else if (index >= 10 && index <= 11) document.getElementById('menu-3').classList.add('active'); // IA & Diferenciadores
-                else if (index >= 12) document.getElementById('menu-4').classList.add('active'); // Contacto
+                else if (index === 10) document.getElementById('menu-3').classList.add('active'); // Diferenciadores
+                else if (index >= 11) document.getElementById('menu-4').classList.add('active'); // Contacto
             });
         });
 
@@ -1346,32 +1323,6 @@
             });
         }
 
-        function initAIChart() {
-            const ctx = document.getElementById('aiChart').getContext('2d');
-            if (aiChart) aiChart.destroy();
-            aiChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['NLP', 'ML Predictive', 'Vision AI', 'Copilots'],
-                    datasets: [{
-                        label: '% Adopción',
-                        data: [85, 62, 45, 92],
-                        backgroundColor: ['#00a4ef', '#00f2ff', '#605dec', '#4f46e5'],
-                        borderRadius: 12,
-                        barThickness: 40
-                    }]
-                },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    scales: { 
-                        y: { display: false, beginAtZero: true },
-                        x: { ticks: { color: '#fff', font: { size: 12, weight: 'bold' } }, grid: { display: false } }
-                    },
-                    plugins: { legend: { display: false } },
-                    animation: { duration: 2500 }
-                }
-            });
-        }
     </script>
 </body>
 </html>
